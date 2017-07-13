@@ -9,7 +9,7 @@ namespace GraphLabs.Core.Graphs {
     }
 
     public getDirectEdge(vertexOne: IVertex, vertexTwo: IVertex): DirectedEdge {
-      return new DirectedEdge(vertexOne, vertexTwo); //TODO: implementation
+      return <DirectedEdge> super.edges.find(a => a.vertexTwo == vertexTwo && a.vertexOne == vertexOne);
     }
   }
 }

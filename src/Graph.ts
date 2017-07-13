@@ -1,7 +1,7 @@
 /**
  * Created by Егор on 13.07.2017.
  */
-import List from 'immutable';
+import {List} from "immutable";
 
 namespace GraphLabs.Core.Graphs {
 
@@ -24,7 +24,7 @@ namespace GraphLabs.Core.Graphs {
     }
 
     public get edgesNumber(): number {
-      return this._vertices.List.size; //Whuttafuck?
+      return this._vertices.size; //Whuttafuck?
     }
 
     public get edges(): List<K> {
