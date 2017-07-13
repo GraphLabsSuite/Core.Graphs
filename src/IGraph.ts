@@ -4,24 +4,23 @@
 import List from 'immutable';
 
 namespace GraphLabs.Core.Graphs {
-
-  export interface IGraph {
+  export interface IGraph<T extends IVertex, K extends IEdge> {
 
     isDirected: boolean;
     allowMultipleEdges: boolean;
 
     edgesNumber: number;
-    edges: List<IEdge>;
+    edges: List<K>;
 
     verticesNumber: number;
-    vertices: List<IVertex>;
+    vertices: List<T>;
 
-    addEdge: (edge: IEdge)=> void;
-    removeEdge: (edge: IEdge)=> void;
-    getEdge: (verticeOne: IVertex, verticeTwo: IVertex)=> IEdge;
+    addEdge: (edge: K)=> void;
+    removeEdge: (edge: K)=> void;
+    getEdge: (verticeOne: T, verticeTwo: T)=> K;
 
-    addVertex: (vertice: IVertex)=> void;
-    removerVertex: (vertice: IVertex)=> void;
+    addVertex: (vertice: T)=> void;
+    removerVertex: (vertice: T)=> void;
 
   }
 }

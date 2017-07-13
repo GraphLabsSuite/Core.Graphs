@@ -6,4 +6,4 @@ The graph library of the GraphLabs project
 
 ### Content
 * IGraph, IVertex, IEdge
-* Vertex, Edge
+* Vertex, Edge, Graph, DirectedGraph, UndirectedGraph, DirectedEdge, UndirectedEdge
