@@ -1,0 +1,24 @@
+{
+  "name": "graphlsbs.core.graphs",
+  "version": "0.0.1",
+  "author": "GraphLabs",
+  "description": "The graph library for the graplabs web project",
+  "keywords": [
+    "graphlabs",
+    "graph",
+    "task",
+    "module"
+  ],
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eakarpov/GraphLabsSuite.Core.Graphs.git"
+  },
+  "dependencies": {
+    "immutable": "^3.8.1",
+    "ts-md5": "^1.2.0"
+  },
+  "devDependencies": {
+
+  }
+}
