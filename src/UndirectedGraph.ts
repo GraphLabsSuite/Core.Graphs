@@ -25,6 +25,6 @@ export class UndirectedGraph extends Graph<Vertex, UndirectedEdge> {
    * @returns {DirectedEdge}
    */
   public getEdge(vertexOne: IVertex, vertexTwo: IVertex): UndirectedEdge {
-    return <DirectedEdge> super.edges.find(a => a.vertexTwo == vertexTwo && a.vertexOne == vertexOne);
+    return <UndirectedEdge> super.edges.find(a => a.vertexTwo == vertexTwo && a.vertexOne == vertexOne);
   }
 }
