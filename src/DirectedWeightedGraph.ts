@@ -1,8 +1,11 @@
 import {Vertex} from "./Vertex";
+import {DirectedWeightedEdge} from "./DirectedWeightedEdge";
+import {IVertex} from "./IVertex";
+import {IWeightedEdge} from "./IWeightedEdge";
 import {Graph} from "./Graph";
 
 
-export class DirectedWeightedGraph extends Graph<Vertex, DirectedWeightedGraph> {
+export class DirectedWeightedGraph extends Graph<IVertex, IWeightedEdge> {
 
   /**
    * @static
@@ -47,10 +50,29 @@ export class DirectedWeightedGraph extends Graph<Vertex, DirectedWeightedGraph> 
   }
 
   /**
+   * @public
+   * Gets the edge by two vertices incident to it
+   * @param vertexOne
+   * @param vertexTwo
+   */
+  public getEdge(vertexOne: IVertex, vertexTwo: IVertex): DirectedWeightedEdge {
+    return <DirectedWeightedEdge> super.edges.find(a => a.vertexTwo == vertexTwo && a.vertexOne == vertexOne);
+  }
+
+  /**
    * @override
    * Deep graph-cloning
+   * @returns {DirectedWeightedGraph}
    */
-  public clone() {
-
+  public clone(): DirectedWeightedGraph {
+    let clone = new DirectedWeightedGraph();
+    super.vertices.forEach(v => clone.addVertex(new Vertex(v.name)));
+    super.edges.forEach(e => {
+      const dwe = <DirectedWeightedEdge> e;
+      const v1 = clone.vertices.find(v => v.eguals(e.vertexOne));
+      const v2 = clone.vertices.find(v => v.eguals(e.vertexTwo));
+      clone.addEdge(new DirectedWeightedEdge(v1, v2, dwe.weight));
+    });
+    return clone;
   }
 }

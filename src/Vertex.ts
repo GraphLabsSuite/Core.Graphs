@@ -130,7 +130,7 @@ export class Vertex implements IVertex {
    * @param vertex
    * @returns {boolean}
    */
-  public eguals(vertex: IVertex) {
+  public eguals(vertex: IVertex): boolean {
     return this.id == vertex.id;
   }
 

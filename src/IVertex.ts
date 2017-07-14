@@ -27,4 +27,10 @@ export interface IVertex {
    * @returns {IVertex}
    */
   rename: (newName: string)=> IVertex
+  /**
+   * Check whether two graphs are equal
+   * @param vertex
+   * @returns {boolean}
+   */
+  eguals: (vertex: IVertex)=> boolean;
 }
