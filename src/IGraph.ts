@@ -1,6 +1,3 @@
-/**
- * Created by Егор on 13.07.2017.
- */
 import List from 'immutable';
 import {IVertex} from "./IVertex";
 import {IEdge} from "./IEdge";
@@ -83,6 +80,49 @@ export interface IGraph<T extends IVertex, K extends IEdge> {
    * @param vertice
    */
   removeVertex: (vertice: T)=> void;
+
+  /**
+   * @public
+   * Returns the result of union operation
+   * @param graph
+   * @returns {IGraph}
+   */
+  union: (graph: IGraph)=> IGraph;
+
+  /**
+   * @static
+   * @public
+   * Static extension of union operation for N graphs
+   * @param graphs
+   * @returns {IGraph}
+   */
+  unionN: (graphs: IGraph[])=> IGraph;
+
+  /**
+   * @public
+   * Returns the result of intersect operation
+   * @param graph
+   * @returns {IGraph}
+   */
+  intersect: (graph: IGraph)=> IGraph;
+
+  /**
+   * @static
+   * @public
+   * Static extension of intersect operation for N graphs
+   * @param graphs
+   * @returns {IGraph}
+   */
+  intersectN: (graphs: IGraph[])=> IGraph;
+
+  /**
+   * Returns the complement graph to this one
+   * @returns {IGraph}
+   */
+  complement: ()=> IGraph;
+
+  //TODO: think about the implementation of this operation
+  buildSCC: ()=> void;
 
   /**
    * Deep graph-cloning

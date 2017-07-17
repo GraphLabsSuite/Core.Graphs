@@ -1,6 +1,3 @@
-/**
- * Created by Егор on 13.07.2017.
- */
 import {Md5} from 'ts-md5/dist/md5';
 import {IVertex} from "./IVertex";
 
@@ -130,7 +127,8 @@ export class Vertex implements IVertex {
    * @param vertex
    * @returns {boolean}
    */
-  public eguals(vertex: IVertex): boolean {
+  public equals(vertex: IVertex): boolean {
+    if (vertex == null) return false;
     return this.id == vertex.id;
   }
 

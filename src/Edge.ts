@@ -65,4 +65,12 @@ export class Edge implements IEdge {
     this._vertexTwo = vertexTwo;
     this._isDirected = undefined;
   }
+
+  public equals(edge: IEdge): boolean {
+    if (edge == null) return false;
+
+    return this.isDirected == edge.isDirected &&
+        (this.vertexOne.equals(edge.vertexOne) && this.vertexTwo.equals(edge.vertexTwo)
+        || !this.isDirected && this.vertexOne.equals(edge.vertexOne) && this.vertexTwo.equals(edge.vertexTwo));
+  }
 }

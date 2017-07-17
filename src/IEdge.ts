@@ -23,4 +23,11 @@ export interface IEdge {
    * The mark shows edge is direct or not
    */
   isDirected: boolean;
+
+  /**
+   * @public
+   * Compares two edges
+   * @param edge
+   */
+  equals:(edge: IEdge)=> boolean;
 }

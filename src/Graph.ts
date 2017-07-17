@@ -1,10 +1,8 @@
-/**
- * Created by Егор on 13.07.2017.
- */
 import {List} from "immutable";
 import {IVertex} from "./IVertex";
 import {IEdge} from "./IEdge";
 import {IGraph} from "./IGraph";
+import {Vertex} from "./Vertex";
 
 /** @classdesc
  * Graph implementation of the IGraph interface */
@@ -98,7 +96,7 @@ export class Graph<T extends IVertex, K extends IEdge> implements IGraph<T,K> {
    * @param edge
    */
   public addEdge(edge: K): void {
-
+    //TODO: implementation
   }
 
   /**
@@ -106,7 +104,7 @@ export class Graph<T extends IVertex, K extends IEdge> implements IGraph<T,K> {
    * @param edge
    */
   public removeEdge(edge: K): void {
-
+    //TODO: implementation
   }
 
   /**
@@ -115,7 +113,7 @@ export class Graph<T extends IVertex, K extends IEdge> implements IGraph<T,K> {
    * @param verticeTwo
    */
   public getEdge(verticeOne: T, verticeTwo: T) {
-
+    //TODO: implementation
   }
 
   /**
@@ -123,7 +121,7 @@ export class Graph<T extends IVertex, K extends IEdge> implements IGraph<T,K> {
    * @param vertex
    */
   public addVertex(vertex: T): void {
-
+    //TODO: implementation
   }
 
   /**
@@ -131,13 +129,91 @@ export class Graph<T extends IVertex, K extends IEdge> implements IGraph<T,K> {
    * @param vertex
    */
   public removeVertex(vertex: T): void {
+    //TODO: implementation
+  }
 
+  /**
+   * Returns the result of union operation for N graphs
+   * @param graphs
+   * @returns {Graph<T,K>}
+   */
+  public static unionN(graphs: IGraph[]): IGraph {
+    if (graphs.length < 2) return Graph.createEmpty(0);
+    //TODO: Think about contracts or asserts
+    const copies = graphs.map(g => g.clone());
+    const result = copies[0];
+    for (let i = 1; i < copies.length; i++)
+    {
+      copies[i].vertices.forEach(result.addVertex);
+      copies[i].edges.forEach(result.addEdge);
+    }
+
+    return result;
+  }
+
+  /**
+   * Returns the result of intersect operation for N graphs
+   * @param graphs
+   * @returns {IGraph<T,K>}
+   */
+  public static intersectN(graphs: IGraph[]): IGraph {
+    if (graphs.length < 2) return Graph.createEmpty(0);
+    //TODO: Think about contracts or asserts
+    const copies = graphs.map(g => g.clone());
+    const result = copies[0];
+    for (let i = 1; i < copies.length; i++)
+    {
+      copies[i].vertices.forEach(result.removeVertex);
+      copies[i].edges.forEach(result.removeEdge);
+    }
+
+    return result;
+  }
+
+  /**
+   * @static
+   * Static builder for the directed weighted graph
+   * @param verticesNumber
+   * @return {DirectedWeightedGraph}
+   */
+  public static createEmpty(verticesNumber: number): IGraph {
+    const newGraph = new IGraph();
+    for (let i = 0; i < verticesNumber; ++i)
+      newGraph.addVertex(new Vertex(i.toString(verticesNumber)));
+    return newGraph;
+  }
+
+  /**
+   * Returns the result of union operation
+   * @param graph
+   * @returns {Graph<T, K>}
+   */
+  public union(graph: IGraph): IGraph {
+    //TODO: Think about contracts or asserts
+    return Graph.unionN([this, graph]);
+  }
+
+  /**
+   * Returns the result of intersect operation
+   * @param graph
+   * @returns {IGraph}
+   */
+  public intersect(graph: IGraph): IGraph {
+    return Graph.intersectN([this, graph]);
+  }
+
+  /**
+   * Returns a complement graph to the given one
+   * @returns {IGraph}
+   */
+  public complement(): IGraph {
+    return Graph.createEmpty(0); //TODO: implementation
   }
 
   /**
    * Deep graph-cloning
    */
   public clone() {
-
+    //TODO: implementation
   }
 }

@@ -32,5 +32,5 @@ export interface IVertex {
    * @param vertex
    * @returns {boolean}
    */
-  eguals: (vertex: IVertex)=> boolean;
+  equals: (vertex: IVertex)=> boolean;
 }
