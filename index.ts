@@ -1,15 +1,15 @@
 /**
  * Created by Егор on 13.07.2017.
  */
-export * from './src/Edge';
-export * from './src/IEdge';
-export * from './src/DirectedEdge';
-export * from './src/UndirectedEdge';
-export * from './src/DirectedWeightedEdge'
-export * from './src/IGraph';
-export * from './src/Graph';
-export * from './src/UndirectedGraph';
-export * from './src/DirectedGraph';
-export * from './src/DirectedWeightedGraph';
-export * from './src/IVertex';
-export * from './src/Vertex';
+export * from './src/main/Edge';
+export * from './src/main/IEdge';
+export * from './src/main/DirectedEdge';
+export * from './src/main/UndirectedEdge';
+export * from './src/main/DirectedWeightedEdge'
+export * from './src/main/IGraph';
+export * from './src/main/Graph';
+export * from './src/main/UndirectedGraph';
+export * from './src/main/DirectedGraph';
+export * from './src/main/DirectedWeightedGraph';
+export * from './src/main/IVertex';
+export * from './src/main/Vertex';

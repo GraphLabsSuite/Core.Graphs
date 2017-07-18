@@ -1,12 +1,13 @@
 import List from 'immutable';
 import {IVertex} from "./IVertex";
 import {IEdge} from "./IEdge";
+import {IGraphStatic} from "./IGraphStatic";
 
 /**
  * @interface
  * Base graph interface
  */
-export interface IGraph<T extends IVertex, K extends IEdge> {
+export interface IGraph<T extends IVertex, K extends IEdge> extends IGraphStatic {
 
   /**
    * @property
@@ -90,15 +91,6 @@ export interface IGraph<T extends IVertex, K extends IEdge> {
   union: (graph: IGraph)=> IGraph;
 
   /**
-   * @static
-   * @public
-   * Static extension of union operation for N graphs
-   * @param graphs
-   * @returns {IGraph}
-   */
-  unionN: (graphs: IGraph[])=> IGraph;
-
-  /**
    * @public
    * Returns the result of intersect operation
    * @param graph
@@ -107,22 +99,20 @@ export interface IGraph<T extends IVertex, K extends IEdge> {
   intersect: (graph: IGraph)=> IGraph;
 
   /**
-   * @static
-   * @public
-   * Static extension of intersect operation for N graphs
-   * @param graphs
-   * @returns {IGraph}
-   */
-  intersectN: (graphs: IGraph[])=> IGraph;
-
-  /**
    * Returns the complement graph to this one
    * @returns {IGraph}
    */
   complement: ()=> IGraph;
 
-  //TODO: think about the implementation of this operation
-  buildSCC: ()=> void;
+  /**
+   * @public
+   * Checks whether the second graph is isomorphic to the given one
+   * @param graph
+   * @returns {boolean}
+   */
+  checkIsomorphism: (graph: IGraph)=> boolean;
+
+  buildSCC: ()=> IGraph[];
 
   /**
    * Deep graph-cloning
