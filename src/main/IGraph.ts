@@ -112,6 +112,11 @@ export interface IGraph<T extends IVertex, K extends IEdge> extends IGraphStatic
    */
   checkIsomorphism: (graph: IGraph)=> boolean;
 
+  /**
+   * @public
+   * Returns strong connected components of the graph
+   * @returns {IGraph[]}
+   */
   buildSCC: ()=> IGraph[];
 
   /**

@@ -1,4 +1,8 @@
 import {IGraph} from "./IGraph";
+/**
+ * @interface
+ * Static function for IGraph interface
+ */
 export class IGraphStatic {
     /**
      * @static

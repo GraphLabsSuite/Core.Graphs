@@ -4,6 +4,7 @@ import {IEdge} from "./IEdge";
 import {IGraph} from "./IGraph";
 import {Vertex} from "./Vertex";
 import {SccBuilder} from "../util/SccBuilder";
+import {IsomorphismChecker} from "../util/IsomorphismChecker";
 
 /** @classdesc
  * Graph implementation of the IGraph interface */
@@ -211,44 +212,19 @@ export class Graph<T extends IVertex, K extends IEdge> implements IGraph<T,K> {
     return Graph.createEmpty(0); //TODO: implementation
   }
 
-  //TODO: implementation
-  public permute(): number[] {
-    return [1];
-  }
-
-  public updateBijection(verticesOne: IVertex[], verticesTwo: IVertex[]): void {
-    // const _bijection = new Dictionary<string, string>();
-    // foreach (string[] i in verticesList1.Zip(verticesList2, (a, b) => new string[] { a.Name, b.Name }))
-    // _bijection.Add(i[1], i[0]);
-  }
-
-  public directCompare(graph: IGraph): boolean {
-    // let equals = 0;
-    // const count = this.edgesNumber;
-    // for (let i = 0; i < count; i++)
-    // for (let j = 0; j < count; j++)
-    // if (compareHelper(graph1.Edges[i].Vertex1, graph2.Edges[j].Vertex1) &&
-    //     CompareHelper(graph1.Edges[i].Vertex2, graph2.Edges[j].Vertex2) ||
-    //     (CompareHelper(graph1.Edges[i].Vertex2, graph2.Edges[j].Vertex1) &&
-    //     CompareHelper(graph1.Edges[i].Vertex1, graph2.Edges[j].Vertex2)))
-    // {
-    //   equals++;
-    //   break;
-    // }
-    // return equals == count;
-  }
-
+  /**
+   * Checks if the second graph is isomorphic to the given one
+   * @param graph
+   * @returns {boolean}
+   */
   public checkIsomorphism(graph: IGraph): boolean {
-    if (this.verticesNumber != graph.verticesNumber || this.edgesNumber != graph.edgesNumber)
-      return false;
-    this.permute().forEach(p => {
-      // updateBijection(perm, graph.vertices);
-      // if (directCompare(graph))
-      //   return true;
-    });
-    return false;
+    return IsomorphismChecker.checkIsomorphism(this, graph);
   }
 
+  /**
+   * Returns strongly connected components of the given graph
+   * @returns {IGraph[]}
+   */
   public buildSCC(): IGraph[] {
     return SccBuilder.findComponents(this);
   }

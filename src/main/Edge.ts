@@ -66,6 +66,11 @@ export class Edge implements IEdge {
     this._isDirected = undefined;
   }
 
+  /**
+   *
+   * @param edge
+   * @returns {boolean}
+   */
   public equals(edge: IEdge): boolean {
     if (edge == null) return false;
 
