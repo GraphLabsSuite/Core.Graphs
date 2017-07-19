@@ -119,6 +119,16 @@ export interface IGraph<T extends IVertex, K extends IEdge> extends IGraphStatic
   buildSCC: ()=> IGraph[];
 
   /**
+   * Printing graph to the screen
+   */
+  print: ()=> void;
+
+  /**
+   * Returns string representation of the graph
+   */
+  toString: ()=> string;
+
+  /**
    * Deep graph-cloning
    * @returns {IGraph}
    */

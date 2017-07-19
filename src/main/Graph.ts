@@ -1,3 +1,4 @@
+import * as _ from "lodash";
 import {IVertex} from "./IVertex";
 import {IEdge} from "./IEdge";
 import {IGraph} from "./IGraph";
@@ -244,10 +245,25 @@ export class Graph<T extends IVertex, K extends IEdge> implements IGraph<T,K> {
     return SccBuilder.findComponents(this);
   }
 
+  public print(): void {
+    console.log(this.toString());
+  }
+
+  public toString(): string {
+    let verticesListStr: string = this.vertices.join(',');
+    if (verticesListStr.length == 0) verticesListStr = "\x00D8";
+
+    let edgesListStr = "";
+    this.edges.forEach(g => edgesListStr.concat(g.vertexOne + "," + g.vertexTwo));
+    if (edgesListStr.length == 0) edgesListStr = "\x00D8";
+
+    return verticesListStr + "," + edgesListStr;
+  }
+
   /**
    * Deep graph-cloning
    */
   public clone() {
-    //TODO: implementation
+    //TODO: implementation (or abstract?)
   }
 }
