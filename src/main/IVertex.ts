@@ -1,5 +1,6 @@
 import {IGraph} from "./IGraph";
 import {IEdge} from "./IEdge";
+import {GraphID} from "../util/GraphID";
 /**
  * @interface
  * Interface of the vertex
@@ -18,7 +19,7 @@ export interface IVertex {
    * @public
    * Id of the vertex, identifying it
    */
-  id: number;
+  id: GraphID;
   /**
    * @property
    * @public

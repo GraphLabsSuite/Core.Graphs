@@ -2,6 +2,7 @@ import {Md5} from 'ts-md5/dist/md5';
 import {IVertex} from "./IVertex";
 import {IGraph} from "./IGraph";
 import {IEdge} from "./IEdge";
+import {GraphID} from "../util/GraphID";
 
 /**
  * @classdesc
@@ -21,7 +22,7 @@ export class Vertex implements IVertex {
    * @private
    * The identifier of the vertex
    */
-  private _id: number;
+  private _id: GraphID;
   /**
    * @property
    * @private
@@ -41,7 +42,7 @@ export class Vertex implements IVertex {
    * Getter for the _id field
    * @returns {number}
    */
-  public get id(): number {
+  public get id(): GraphID {
     return this._id;
   }
 
@@ -91,13 +92,13 @@ export class Vertex implements IVertex {
    */
   public constructor(name: string) {
     this._name = name;
-    this._id = Math.random();
+    this._id = GraphID.generate();
     this._label = "";
   }
 
   public constructor(name: string, graph: IGraph) {
     this._name = name;
-    this._id = Math.random();
+    this._id = GraphID.generate();
     this._label = "";
     this._graphReference = graph;
   }
@@ -159,7 +160,7 @@ export class Vertex implements IVertex {
    */
   public equals(vertex: IVertex): boolean {
     if (vertex == null) return false;
-    return this.id == vertex.id;
+    return this.id.equals(vertex.id);
   }
 
 }

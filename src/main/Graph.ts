@@ -3,8 +3,8 @@ import {IVertex} from "./IVertex";
 import {IEdge} from "./IEdge";
 import {IGraph} from "./IGraph";
 import {Vertex} from "./Vertex";
-import {SccBuilder} from "../util/SccBuilder";
-import {IsomorphismChecker} from "../util/IsomorphismChecker";
+import {SccBuilder} from "../algorithms/SccBuilder";
+import {IsomorphismChecker} from "../algorithms/IsomorphismChecker";
 
 /** @classdesc
  * Graph implementation of the IGraph interface */
