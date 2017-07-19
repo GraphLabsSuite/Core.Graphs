@@ -23,6 +23,6 @@ export class DirectedGraph extends Graph<Vertex, DirectedEdge> {
    * @returns {DirectedEdge}
    */
   public getDirectEdge(vertexOne: IVertex, vertexTwo: IVertex): DirectedEdge {
-    return <DirectedEdge> super.edges.find(a => a.vertexTwo == vertexTwo && a.vertexOne == vertexOne);
+    return <DirectedEdge> super.edges.filter(a => a.vertexTwo == vertexTwo && a.vertexOne == vertexOne)[0];
   }
 }

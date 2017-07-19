@@ -8,7 +8,7 @@ export class IsomorphismChecker {
 
     public static bijection: { [key: string]: string; };
 
-    public static permute(vertices: IVertex[]): IVertex[] {
+    public static permute(vertices: IVertex[]): IVertex[][] {
         //TODO: find out the way of creating generator
         // if (xs.Length == 0) yield return pre;
         // for (int i = 0; i < xs.Length; i++)
@@ -42,7 +42,7 @@ export class IsomorphismChecker {
         for (let j: number = 0; j < count; j++)
         if (IsomorphismChecker.compareHelper(graphOne.edges[i].vertexOne, graphTwo.edges[j].vertexOne) &&
             IsomorphismChecker.compareHelper(graphOne.edges[i].vertexTwo, graphTwo.edges[j].vertexTwo) ||
-            (IsomorphismChecker.compareHelper(graphOne.edges[i].vertexTwo, graphTwo.edges[j].vertexTwo) &&
+            (IsomorphismChecker.compareHelper(graphOne.edges[i].vertexTwo, graphTwo.edges[j].vertexOne) &&
             IsomorphismChecker.compareHelper(graphOne.edges[i].vertexOne, graphTwo.edges[j].vertexTwo)))
         {
           equals++;

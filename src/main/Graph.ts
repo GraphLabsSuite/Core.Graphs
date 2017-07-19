@@ -1,4 +1,3 @@
-import {List} from "immutable";
 import {IVertex} from "./IVertex";
 import {IEdge} from "./IEdge";
 import {IGraph} from "./IGraph";
@@ -21,11 +20,11 @@ export class Graph<T extends IVertex, K extends IEdge> implements IGraph<T,K> {
   /** @property
    *  @private
    * The list of vertices in the graph */
-  private _vertices: List<T>;
+  private _vertices: T[];
   /** @property
    *  @private
    * The list of edges in the graph */
-  private _edges: List<K>;
+  private _edges: K[];
 
   /** @property
    *  @public
@@ -49,9 +48,9 @@ export class Graph<T extends IVertex, K extends IEdge> implements IGraph<T,K> {
    * @property
    * @public
    * Getter for _vertices field
-   * @return {List<T>}
+   * @return {T[]}
    */
-  public get vertices(): List<T> {
+  public get vertices(): T[] {
     return this._vertices;
   }
 
@@ -62,7 +61,7 @@ export class Graph<T extends IVertex, K extends IEdge> implements IGraph<T,K> {
    * @return {number}
    */
   public get edgesNumber(): number {
-    return this._vertices.size;
+    return this._vertices.length;
   }
 
   /**
@@ -72,16 +71,16 @@ export class Graph<T extends IVertex, K extends IEdge> implements IGraph<T,K> {
    * @return {number}
    */
   public get verticesNumber(): number {
-    return this._vertices.size;
+    return this._vertices.length;
   }
 
   /**
    * @property
    * @public
    * Getter for _edges field
-   * @return {List<K>}
+   * @return {K[]}
    */
-  public get edges(): List<K> {
+  public get edges(): K[] {
     return this._edges;
   }
 
@@ -89,8 +88,8 @@ export class Graph<T extends IVertex, K extends IEdge> implements IGraph<T,K> {
    * @constructor
    */
    public constructor<T,K>() {
-    this._vertices = new List<T>();
-    this._edges = new List<K>();
+    this._vertices = [];
+    this._edges = [];
   }
 
   /**
@@ -98,7 +97,7 @@ export class Graph<T extends IVertex, K extends IEdge> implements IGraph<T,K> {
    * @param edge
    */
   public addEdge(edge: K): void {
-    //TODO: implementation
+    this.edges.push(edge);
   }
 
   /**
@@ -106,16 +105,26 @@ export class Graph<T extends IVertex, K extends IEdge> implements IGraph<T,K> {
    * @param edge
    */
   public removeEdge(edge: K): void {
-    //TODO: implementation
+    let edges: K[] = [];
+    let edgeOut: K = null;
+    do {
+      edgeOut = this.edges.pop();
+      edges.push(edgeOut);
+    } while (edgeOut != edge);
+    edges.forEach(e => this.edges.push(e));
   }
 
   /**
    * Gets the edge between the two vertices incident to it
-   * @param verticeOne
-   * @param verticeTwo
+   * @param vertexOne
+   * @param vertexTwo
    */
-  public getEdge(verticeOne: T, verticeTwo: T) {
-    //TODO: implementation
+  public getEdge(vertexOne: T, vertexTwo: T): K {
+    let result: K = null;
+    this.edges.forEach(edge => {
+      if (edge.vertexOne == vertexOne && edge.vertexTwo == vertexTwo) result = edge;
+    });
+    return result;
   }
 
   /**
@@ -123,7 +132,7 @@ export class Graph<T extends IVertex, K extends IEdge> implements IGraph<T,K> {
    * @param vertex
    */
   public addVertex(vertex: T): void {
-    //TODO: implementation
+    this.vertices.push(vertex);
   }
 
   /**
@@ -131,7 +140,13 @@ export class Graph<T extends IVertex, K extends IEdge> implements IGraph<T,K> {
    * @param vertex
    */
   public removeVertex(vertex: T): void {
-    //TODO: implementation
+    let vertices: T[] = [];
+    let vertexOut: T = null;
+    do {
+      vertexOut = this.vertices.pop();
+      vertices.push(vertexOut);
+    } while (vertexOut != vertex);
+    vertices.forEach(v => this.vertices.push(v));
   }
 
   /**

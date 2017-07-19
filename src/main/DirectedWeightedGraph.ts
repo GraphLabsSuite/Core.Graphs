@@ -56,7 +56,7 @@ export class DirectedWeightedGraph extends Graph<IVertex, IWeightedEdge> {
    * @param vertexTwo
    */
   public getEdge(vertexOne: IVertex, vertexTwo: IVertex): DirectedWeightedEdge {
-    return <DirectedWeightedEdge> super.edges.find(a => a.vertexTwo == vertexTwo && a.vertexOne == vertexOne);
+    return <DirectedWeightedEdge> super.edges.filter(a => a.vertexTwo == vertexTwo && a.vertexOne == vertexOne)[0];
   }
 
   /**
@@ -69,8 +69,8 @@ export class DirectedWeightedGraph extends Graph<IVertex, IWeightedEdge> {
     super.vertices.forEach(v => clone.addVertex(new Vertex(v.name)));
     super.edges.forEach(e => {
       const dwe = <DirectedWeightedEdge> e;
-      const v1 = clone.vertices.find(v => v.eguals(e.vertexOne));
-      const v2 = clone.vertices.find(v => v.eguals(e.vertexTwo));
+      const v1 = clone.vertices.filter(v => v.equals(e.vertexOne))[0];
+      const v2 = clone.vertices.filter(v => v.equals(e.vertexTwo))[0];
       clone.addEdge(new DirectedWeightedEdge(v1, v2, dwe.weight));
     });
     return clone;

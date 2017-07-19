@@ -1,4 +1,3 @@
-import List from 'immutable';
 import {IVertex} from "./IVertex";
 import {IEdge} from "./IEdge";
 import {IGraphStatic} from "./IGraphStatic";
@@ -33,7 +32,7 @@ export interface IGraph<T extends IVertex, K extends IEdge> extends IGraphStatic
    * @public
    * The list of edges in the graph
    */
-  edges: List<K>;
+  edges: K[];
 
   /**
    * @property
@@ -46,7 +45,7 @@ export interface IGraph<T extends IVertex, K extends IEdge> extends IGraphStatic
    * @public
    * The list of vertices in the graph
    */
-  vertices: List<T>;
+  vertices: T[];
 
   /**
    * @public
