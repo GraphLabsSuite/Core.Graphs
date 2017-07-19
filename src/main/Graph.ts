@@ -129,6 +129,19 @@ export class Graph<T extends IVertex, K extends IEdge> implements IGraph<T,K> {
   }
 
   /**
+   * Get the vertex by its name
+   * @param name
+   * @returns {T[]}
+   */
+  public getVertex(name: string): T[] {
+    let verticesOut: T[] = [];
+    for (const v of this.vertices) {
+      if (v.name === name) verticesOut.push(v);
+    }
+    return verticesOut;
+  }
+
+  /**
    * Adds the vertex to the graph
    * @param vertex
    */

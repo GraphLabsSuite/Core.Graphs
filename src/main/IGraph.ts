@@ -83,6 +83,13 @@ export interface IGraph<T extends IVertex, K extends IEdge> extends IGraphStatic
 
   /**
    * @public
+   * Returns the vertex of the graph by its name
+   * @param name
+   */
+  getVertex: (name: string)=> T;
+
+  /**
+   * @public
    * Returns the result of union operation
    * @param graph
    * @returns {IGraph}
