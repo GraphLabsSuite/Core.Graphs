@@ -25,6 +25,12 @@ export interface IEdge {
   isDirected: boolean;
 
   /**
+   * Checks whether the vertex is incident to the edge
+   * @param vertex
+   */
+  isIncident: (vertex: IVertex)=> boolean;
+
+  /**
    * @public
    * Compares two edges
    * @param edge

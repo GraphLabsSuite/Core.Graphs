@@ -1,11 +1,21 @@
 import {Md5} from 'ts-md5/dist/md5';
 import {IVertex} from "./IVertex";
+import {IGraph} from "./IGraph";
+import {IEdge} from "./IEdge";
 
 /**
  * @classdesc
  * The vertex implementation of IVertex interface
  */
 export class Vertex implements IVertex {
+
+  /**
+   * @property
+   * @private
+   * Reference to the graph the vertex belongs to
+   */
+  private _graphReference?: IGraph;
+
   /**
    * @property
    * @private
@@ -85,6 +95,13 @@ export class Vertex implements IVertex {
     this._label = "";
   }
 
+  public constructor(name: string, graph: IGraph) {
+    this._name = name;
+    this._id = Math.random();
+    this._label = "";
+    this._graphReference = graph;
+  }
+
   /**
    * @public
    * Allows to change the name field of the vertex
@@ -92,6 +109,19 @@ export class Vertex implements IVertex {
    */
   public rename(newName: string) {
     this.setName(newName);
+  }
+
+  public isIncident(edge: IEdge): boolean {
+    return edge.isIncident(this);
+  }
+
+  public isAdjacent(vertex: IVertex): boolean {
+    if (this._graphReference == null) return false;
+    this._graphReference.edges.forEach(e => {
+      if (e.vertexOne.equals(this) && e.vertexTwo.equals(vertex)||
+      e.vertexTwo.equals(this) && e.vertexOne.equals(vertex)) return true;
+    });
+    return false;
   }
 
   /**

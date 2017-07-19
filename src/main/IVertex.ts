@@ -1,8 +1,18 @@
+import {IGraph} from "./IGraph";
+import {IEdge} from "./IEdge";
 /**
  * @interface
  * Interface of the vertex
  */
 export interface IVertex {
+
+  /**
+   * @property
+   * @private
+   * Graph to which the vertex belongs to
+   */
+  _graphReference?: IGraph;
+
   /**
    * @property
    * @public
@@ -27,6 +37,19 @@ export interface IVertex {
    * @returns {IVertex}
    */
   rename: (newName: string)=> IVertex
+
+  /**
+   * Checks whether the edge is incident to the vertex
+   * @param edge
+   */
+  isIncident: (edge: IEdge)=> boolean;
+
+  /**
+   * Checks whether the vertex is adjacent to the given one
+   * @param vertex
+   */
+  isAdjacent: (vertex: IVertex)=> boolean;
+
   /**
    * Check whether two graphs are equal
    * @param vertex

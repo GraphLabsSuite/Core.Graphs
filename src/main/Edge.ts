@@ -66,6 +66,10 @@ export class Edge implements IEdge {
     this._isDirected = undefined;
   }
 
+  public isIncident(vertex: IVertex): boolean {
+    return vertex.equals(this.vertexOne) || vertex.equals(this.vertexTwo);
+  }
+
   /**
    *
    * @param edge
