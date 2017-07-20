@@ -1,5 +1,5 @@
-import {IVertex} from "./IVertex";
-import {IEdge} from "./IEdge";
+import {IVertex} from "../types/IVertex";
+import {IEdge} from "../types/IEdge";
 
 /**
  * The Edge implementation of the IEdge interface

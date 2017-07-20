@@ -1,5 +1,5 @@
-import {IGraph} from "../main/IGraph";
-import {IVertex} from "../main/IVertex";
+import {IGraph} from "../types/IGraph";
+import {IVertex} from "../types/IVertex";
 import {DirectedGraph} from "../main/DirectedGraph";
 import {UndirectedGraph} from "../main/UndirectedGraph";
 

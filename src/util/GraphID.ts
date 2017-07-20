@@ -1,17 +1,17 @@
 export class GraphID {
 
-    private idValue: number;
+    private _idValue: number;
 
     public static generate(): GraphID {
         return new GraphID();
     }
 
     public get idValue(): number {
-        return this.idValue;
+        return this._idValue;
     }
 
     public constructor() {
-        this.idValue =  Math.random();
+        this._idValue =  Math.random();
     }
 
     public equals(id: GraphID): boolean {

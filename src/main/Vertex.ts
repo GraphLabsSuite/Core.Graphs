@@ -1,7 +1,7 @@
 import {Md5} from 'ts-md5/dist/md5';
-import {IVertex} from "./IVertex";
-import {IGraph} from "./IGraph";
-import {IEdge} from "./IEdge";
+import {IVertex} from "../types/IVertex";
+import {IGraph} from "../types/IGraph";
+import {IEdge} from "../types/IEdge";
 import {GraphID} from "../util/GraphID";
 
 /**
@@ -15,7 +15,7 @@ export class Vertex implements IVertex {
    * @private
    * Reference to the graph the vertex belongs to
    */
-  private _graphReference?: IGraph;
+  private _graphReference?: IGraph<Vertex,IEdge>;
 
   /**
    * @property
@@ -90,17 +90,12 @@ export class Vertex implements IVertex {
    * @constructor
    * @param name
    */
-  public constructor(name: string) {
+  public constructor(name: string);
+  public constructor(name: string, graph?: IGraph<Vertex, IEdge>) {
     this._name = name;
     this._id = GraphID.generate();
     this._label = "";
-  }
-
-  public constructor(name: string, graph: IGraph) {
-    this._name = name;
-    this._id = GraphID.generate();
-    this._label = "";
-    this._graphReference = graph;
+    this._graphReference = graph || null;
   }
 
   /**

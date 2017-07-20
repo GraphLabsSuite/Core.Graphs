@@ -1,5 +1,5 @@
-import {IVertex} from "../main/IVertex";
-import {IGraph} from "../main/IGraph";
+import {IVertex} from "../types/IVertex";
+import {IGraph} from "../types/IGraph";
 
 /**
  * Checker of the two graphs isomorphism

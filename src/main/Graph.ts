@@ -1,7 +1,7 @@
 import * as _ from "lodash";
-import {IVertex} from "./IVertex";
-import {IEdge} from "./IEdge";
-import {IGraph} from "./IGraph";
+import {IVertex} from "../types/IVertex";
+import {IEdge} from "../types/IEdge";
+import {IGraph} from "../types/IGraph";
 import {Vertex} from "./Vertex";
 import {SccBuilder} from "../algorithms/SccBuilder";
 import {IsomorphismChecker} from "../algorithms/IsomorphismChecker";

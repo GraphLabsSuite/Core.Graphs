@@ -1,7 +1,7 @@
 import {Vertex} from "./Vertex";
 import {DirectedWeightedEdge} from "./DirectedWeightedEdge";
-import {IVertex} from "./IVertex";
-import {IWeightedEdge} from "./IWeightedEdge";
+import {IVertex} from "../types/IVertex";
+import {IWeightedEdge} from "../types/IWeightedEdge";
 import {Graph} from "./Graph";
 
 

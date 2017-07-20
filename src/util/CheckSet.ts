@@ -1,4 +1,4 @@
-import {IVertex} from "../main/IVertex";
+import {IVertex} from "../types/IVertex";
 import {UndirectedGraph} from "../main/UndirectedGraph";
 /**
  * @classdesc

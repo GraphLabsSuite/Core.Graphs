@@ -1,4 +1,4 @@
-import {IGraph} from "../main/IGraph";
+import {IGraph} from "../types/IGraph";
 import {GraphToJSONConverter} from "./GraphToJSONConverter";
 export class GraphSerializer {
     public static serialize(graph: IGraph): string {

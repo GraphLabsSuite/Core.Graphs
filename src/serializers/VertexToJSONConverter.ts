@@ -1,4 +1,4 @@
-import {IVertex} from "../main/IVertex";
+import {IVertex} from "../types/IVertex";
 import {Vertex} from "../main/Vertex";
 export class VertexToJSONConverter {
     public static convert(vertex: IVertex): VertexJSON {

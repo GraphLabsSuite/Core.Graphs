@@ -1,4 +1,4 @@
-import {IGraph} from "../main/IGraph";
+import {IGraph} from "../types/IGraph";
 import {VertexToJSONConverter} from "./VertexToJSONConverter";
 import {EdgeToJSONConverter} from "./EdgeToJSONConverter";
 import {Graph} from "../main/Graph";

@@ -1,4 +1,4 @@
-import {IEdge} from "../main/IEdge";
+import {IEdge} from "../types/IEdge";
 import {VertexToJSONConverter} from "./VertexToJSONConverter";
 import {DirectedEdge} from "../main/DirectedEdge";
 import {Edge} from "../main/Edge";

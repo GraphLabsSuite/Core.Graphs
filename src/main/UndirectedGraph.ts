@@ -1,7 +1,7 @@
 import {Vertex} from "./Vertex";
 import {UndirectedEdge} from "./UndirectedEdge";
 import {Graph} from "./Graph";
-import {IVertex} from "./IVertex";
+import {IVertex} from "../types/IVertex";
 import {DirectedEdge} from "./DirectedEdge";
 import {MinDSEvaluator} from "../algorithms/MinDSEvaluator";
 

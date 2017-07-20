@@ -1,7 +1,7 @@
 import {Graph} from "./Graph";
 import {Vertex} from "./Vertex";
 import {DirectedEdge} from "./DirectedEdge";
-import {IVertex} from "./IVertex";
+import {IVertex} from "../types/IVertex";
 
 /**
  * @classdesc

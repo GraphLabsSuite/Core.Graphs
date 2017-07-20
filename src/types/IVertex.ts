@@ -9,13 +9,6 @@ export interface IVertex {
 
   /**
    * @property
-   * @private
-   * Graph to which the vertex belongs to
-   */
-  _graphReference?: IGraph;
-
-  /**
-   * @property
    * @public
    * Id of the vertex, identifying it
    */
@@ -37,7 +30,7 @@ export interface IVertex {
    * @param newName
    * @returns {IVertex}
    */
-  rename: (newName: string)=> IVertex
+  rename: (newName: string)=> void
 
   /**
    * Checks whether the edge is incident to the vertex

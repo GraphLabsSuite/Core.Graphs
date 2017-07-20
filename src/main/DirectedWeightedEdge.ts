@@ -1,5 +1,5 @@
 import {Edge} from "./Edge";
-import {IVertex} from "./IVertex";
+import {IVertex} from "../types/IVertex";
 
 /**
  * @classdesc
