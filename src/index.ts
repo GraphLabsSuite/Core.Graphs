@@ -12,7 +12,3 @@ export * from './main/DirectedWeightedGraph';
 
 export * from './main/IVertex';
 export * from './main/Vertex';
-
-export * from './algorithms/SccBuilder';
-export * from './algorithms/MinDSEvaluator';
-export * from './algorithms/IsomorphismChecker';

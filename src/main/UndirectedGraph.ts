@@ -3,6 +3,7 @@ import {UndirectedEdge} from "./UndirectedEdge";
 import {Graph} from "./Graph";
 import {IVertex} from "./IVertex";
 import {DirectedEdge} from "./DirectedEdge";
+import {MinDSEvaluator} from "../algorithms/MinDSEvaluator";
 
 /**
  * @classdesc
@@ -26,6 +27,16 @@ export class UndirectedGraph extends Graph<Vertex, UndirectedEdge> {
    */
   public getEdge(vertexOne: IVertex, vertexTwo: IVertex): UndirectedEdge {
     return <UndirectedEdge> super.edges.filter(a => a.vertexTwo == vertexTwo && a.vertexOne == vertexOne)[0];
+  }
+
+  /**
+   * Returns the minimal dominating sets of the graph
+   * @returns {IVertex[][]}
+   */
+  public buildMDS(): IVertex[][] {
+    const evaluator: MinDSEvaluator = new MinDSEvaluator(this);
+    evaluator.evaluate(this, false);
+    return evaluator._minDs;
   }
 
   /**

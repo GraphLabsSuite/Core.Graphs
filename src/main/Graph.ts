@@ -5,6 +5,7 @@ import {IGraph} from "./IGraph";
 import {Vertex} from "./Vertex";
 import {SccBuilder} from "../algorithms/SccBuilder";
 import {IsomorphismChecker} from "../algorithms/IsomorphismChecker";
+import {MinDSEvaluator} from "../algorithms/MinDSEvaluator";
 
 /** @classdesc
  * Graph implementation of the IGraph interface */
