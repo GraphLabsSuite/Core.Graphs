@@ -20,6 +20,10 @@
     "lodash": "^4.13.1"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.64"
+    "@types/lodash": "^4.14.64",
+    "@types/mocha": "^2.2.41",
+    "@types/chai": "^4.0.1",
+    "mocha": "^3.4.2",
+    "chai": "^4.1.0"
   }
 }
