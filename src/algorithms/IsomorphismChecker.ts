@@ -8,18 +8,23 @@ export class IsomorphismChecker {
 
     public static bijection: { [key: string]: string; };
 
-    public static permute(vertices: IVertex[]): IVertex[][] {
-        //TODO: find out the way of creating generator
-        // if (xs.Length == 0) yield return pre;
-        // for (int i = 0; i < xs.Length; i++)
-        // {
-        //     var tmp_xs = xs.Take(i).Union(xs.Skip(i + 1)).ToArray();
-        //     var tmpParams = pre.Union(new[] { xs[i] }).ToArray();
-        //     foreach (T[] y in Permute(tmp_xs, tmpParams))
-        //     {
-        //         yield return y;
-        //     }
-        // }
+    //Not sure this is the right way to emulate generators working
+    public static permute(vertices: IVertex[], pre: IVertex[][] = []): IVertex[][] {
+        const result: IVertex[][] = [];
+        if (vertices.length == 0) return pre;
+        for (let i = 0; i < vertices.length; i++) {
+            const tmp_vertices: IVertex[] = [];
+            vertices.forEach(v => {
+                if (!v.equals(vertices[i])) tmp_vertices.push(v);
+            });
+            const tmpParams: IVertex[][] = [];
+            pre.forEach(v => tmpParams.push(v));
+            tmpParams.push([vertices[i]]);
+            for (const y of this.permute(tmp_vertices, tmpParams)) {
+                result.push(y);
+            }
+        }
+        return result;
     }
 
     public static updateBijection(verticesOne: IVertex[], verticesTwo: IVertex[]): void {

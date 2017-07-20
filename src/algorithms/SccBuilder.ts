@@ -1,11 +1,17 @@
-import {List} from "immutable";
 import {IGraph} from "../main/IGraph";
 import {IVertex} from "../main/IVertex";
 import {DirectedGraph} from "../main/DirectedGraph";
 import {UndirectedGraph} from "../main/UndirectedGraph";
+
+/**
+ * @classdesc
+ * Finder of SCC
+ */
 export class SccBuilder {
     /**
-     *  Ищет компоненты связности для заданного графа
+     * Finds strongly connected components
+     * @param graph
+     * @returns {IGraph[]}
      */
     public static findComponents(graph: IGraph): IGraph[] {
         return (new SccBuilder(graph)).buildComponents();
@@ -13,7 +19,7 @@ export class SccBuilder {
 
     private readonly _accessibilityMatrix: number[][];
     private readonly _graph: IGraph;
-    private readonly _vertices: List<IVertex>;
+    private readonly _vertices: IVertex[];
 
     private constructor(graph: IGraph) {
         this._graph = graph;
@@ -62,7 +68,7 @@ export class SccBuilder {
             added[i] = false;
         }
 
-        const components: IGraph[] = new IGraph[];
+        const components: IGraph[] = [];
         for (let i: number = 0; i < this._graph.verticesNumber; i++)
         {
             if (added[i])
@@ -85,9 +91,10 @@ export class SccBuilder {
         }
         this._graph.edges.forEach(edge => {
             const whereToAdd =
-                components.filter(c => c.vertices.indexOf(edge.vertexOne) != NaN && c.vertices.indexOf(edge.vertexTwo)) != NaN;
+                components.filter(c => c.vertices.indexOf(edge.vertexOne) != -1 &&
+                c.vertices.indexOf(edge.vertexTwo) != -1);
             whereToAdd.forEach(c => c.addEdge(edge));
-        };
+        });
         return components;
     }
 }
