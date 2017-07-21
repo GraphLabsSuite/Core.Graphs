@@ -4,8 +4,8 @@ import {DirectedEdge} from "./DirectedEdge";
 import {IVertex} from "../types/IVertex";
 
 /**
- * @classdesc
  * Directed graph
+ * @classdes
  */
 export class DirectedGraph extends Graph<Vertex, DirectedEdge> {
 
@@ -13,7 +13,7 @@ export class DirectedGraph extends Graph<Vertex, DirectedEdge> {
    * @constructor
    */
   public constructor() {
-    super();
+    super(true);
   }
 
   /**
@@ -23,7 +23,7 @@ export class DirectedGraph extends Graph<Vertex, DirectedEdge> {
    * @returns {DirectedEdge}
    */
   public getDirectEdge(vertexOne: IVertex, vertexTwo: IVertex): DirectedEdge {
-    return <DirectedEdge> super.edges.filter(a => a.vertexTwo == vertexTwo && a.vertexOne == vertexOne)[0];
+    return <DirectedEdge> this.edges.filter(a => a.vertexTwo == vertexTwo && a.vertexOne == vertexOne)[0];
   }
 
   /**

@@ -1,5 +1,6 @@
 import {IVertex} from "../types/IVertex";
 import {IGraph} from "../types/IGraph";
+import {IEdge} from "../types/IEdge";
 
 /**
  * Checker of the two graphs isomorphism
@@ -40,7 +41,7 @@ export class IsomorphismChecker {
         return vertexOne.name == IsomorphismChecker.bijection[vertexTwo.name];
     }
 
-    public static directCompare(graphOne: IGraph, graphTwo: IGraph): boolean {
+    public static directCompare(graphOne: IGraph<IVertex, IEdge>, graphTwo: IGraph<IVertex, IEdge>): boolean {
         let equals: number = 0;
         const count: number = graphOne.edgesNumber;
         for (let i: number = 0; i < count; i++)
@@ -56,7 +57,7 @@ export class IsomorphismChecker {
         return equals == count;
     }
 
-    public static checkIsomorphism(graphOne: IGraph, graphTwo: IGraph): boolean {
+    public static checkIsomorphism(graphOne: IGraph<IVertex, IEdge>, graphTwo: IGraph<IVertex, IEdge>): boolean {
         if (graphOne.verticesNumber != graphTwo.verticesNumber || graphOne.edgesNumber != graphTwo.edgesNumber)
             return false;
         IsomorphismChecker.permute(graphOne.vertices).forEach(perm => {

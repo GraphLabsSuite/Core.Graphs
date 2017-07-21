@@ -5,7 +5,6 @@ import {IGraph} from "../types/IGraph";
 import {Vertex} from "./Vertex";
 import {SccBuilder} from "../algorithms/SccBuilder";
 import {IsomorphismChecker} from "../algorithms/IsomorphismChecker";
-import {MinDSEvaluator} from "../algorithms/MinDSEvaluator";
 
 /** @classdesc
  * Graph implementation of the IGraph interface */
@@ -89,9 +88,10 @@ export class Graph<T extends IVertex, K extends IEdge> implements IGraph<T,K> {
   /**
    * @constructor
    */
-   public constructor<T,K>() {
+   public constructor(directed?: boolean) {
     this._vertices = [];
     this._edges = [];
+    this._isDirected = directed == null ? false : directed;
   }
 
   /**
@@ -169,7 +169,7 @@ export class Graph<T extends IVertex, K extends IEdge> implements IGraph<T,K> {
    * @param graphs
    * @returns {Graph<T,K>}
    */
-  public static unionN(graphs: IGraph[]): IGraph {
+  public static unionN(graphs: IGraph<IVertex, IEdge>[]): IGraph<IVertex, IEdge> {
     if (graphs.length < 2) return Graph.createEmpty(0);
     //TODO: Think about contracts or asserts
     const copies = graphs.map(g => g.clone());
@@ -188,7 +188,7 @@ export class Graph<T extends IVertex, K extends IEdge> implements IGraph<T,K> {
    * @param graphs
    * @returns {IGraph<T,K>}
    */
-  public static intersectN(graphs: IGraph[]): IGraph {
+  public static intersectN(graphs: IGraph<IVertex, IEdge>[]): IGraph<IVertex, IEdge> {
     if (graphs.length < 2) return Graph.createEmpty(0);
     //TODO: Think about contracts or asserts
     const copies = graphs.map(g => g.clone());
@@ -208,8 +208,8 @@ export class Graph<T extends IVertex, K extends IEdge> implements IGraph<T,K> {
    * @param verticesNumber
    * @return {DirectedWeightedGraph}
    */
-  public static createEmpty(verticesNumber: number): IGraph {
-    const newGraph = new IGraph();
+  public static createEmpty(verticesNumber: number): IGraph<IVertex, IEdge> {
+    const newGraph = new Graph<IVertex, IEdge>();
     for (let i = 0; i < verticesNumber; ++i)
       newGraph.addVertex(new Vertex(i.toString(verticesNumber)));
     return newGraph;
@@ -220,7 +220,7 @@ export class Graph<T extends IVertex, K extends IEdge> implements IGraph<T,K> {
    * @param graph
    * @returns {Graph<T, K>}
    */
-  public union(graph: IGraph): IGraph {
+  public union(graph: IGraph<IVertex, IEdge>): IGraph<IVertex, IEdge> {
     //TODO: Think about contracts or asserts
     return Graph.unionN([this, graph]);
   }
@@ -230,7 +230,7 @@ export class Graph<T extends IVertex, K extends IEdge> implements IGraph<T,K> {
    * @param graph
    * @returns {IGraph}
    */
-  public intersect(graph: IGraph): IGraph {
+  public intersect(graph: IGraph<IVertex, IEdge>): IGraph<IVertex, IEdge> {
     return Graph.intersectN([this, graph]);
   }
 
@@ -238,7 +238,7 @@ export class Graph<T extends IVertex, K extends IEdge> implements IGraph<T,K> {
    * Returns a complement graph to the given one
    * @returns {IGraph}
    */
-  public complement(): IGraph {
+  public complement(): IGraph<IVertex, IEdge> {
     return Graph.createEmpty(0); //TODO: implementation
   }
 
@@ -247,7 +247,7 @@ export class Graph<T extends IVertex, K extends IEdge> implements IGraph<T,K> {
    * @param graph
    * @returns {boolean}
    */
-  public checkIsomorphism(graph: IGraph): boolean {
+  public checkIsomorphism(graph: IGraph<IVertex, IEdge>): boolean {
     return IsomorphismChecker.checkIsomorphism(this, graph);
   }
 
@@ -255,8 +255,9 @@ export class Graph<T extends IVertex, K extends IEdge> implements IGraph<T,K> {
    * Returns strongly connected components of the given graph
    * @returns {IGraph[]}
    */
-  public buildSCC(): IGraph[] {
-    return SccBuilder.findComponents(this);
+  public buildSCC(): IGraph<IVertex, IEdge>[] {
+    // return SccBuilder.findComponents(this);
+    return [];
   }
 
   public print(): void {

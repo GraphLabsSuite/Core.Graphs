@@ -46,7 +46,7 @@ export class DirectedWeightedGraph extends Graph<IVertex, IWeightedEdge> {
    * @constructor
    */
   public constructor() {
-    super();
+    super(true);
   }
 
   /**

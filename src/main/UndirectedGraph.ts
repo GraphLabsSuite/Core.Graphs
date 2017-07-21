@@ -15,7 +15,7 @@ export class UndirectedGraph extends Graph<Vertex, UndirectedEdge> {
    * @constructor
    */
   public constructor() {
-    super();
+    super(false);
   }
 
   /**
@@ -26,7 +26,7 @@ export class UndirectedGraph extends Graph<Vertex, UndirectedEdge> {
    * @returns {DirectedEdge}
    */
   public getEdge(vertexOne: IVertex, vertexTwo: IVertex): UndirectedEdge {
-    return <UndirectedEdge> super.edges.filter(a => a.vertexTwo == vertexTwo && a.vertexOne == vertexOne)[0];
+    return <UndirectedEdge> this.edges.filter(a => a.vertexTwo == vertexTwo && a.vertexOne == vertexOne)[0];
   }
 
   /**

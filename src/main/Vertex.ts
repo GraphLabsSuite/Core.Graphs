@@ -15,7 +15,7 @@ export class Vertex implements IVertex {
    * @private
    * Reference to the graph the vertex belongs to
    */
-  private _graphReference?: IGraph<Vertex,IEdge>;
+  private _graphReference?: IGraph<IVertex,IEdge>;
 
   /**
    * @property
@@ -89,13 +89,13 @@ export class Vertex implements IVertex {
   /**
    * @constructor
    * @param name
+   * @param graph
    */
-  public constructor(name: string);
-  public constructor(name: string, graph?: IGraph<Vertex, IEdge>) {
+  public constructor(name: string, graph?: IGraph<IVertex, IEdge>) {
     this._name = name;
     this._id = GraphID.generate();
     this._label = "";
-    this._graphReference = graph || null;
+    this._graphReference = graph
   }
 
   /**
@@ -113,11 +113,14 @@ export class Vertex implements IVertex {
 
   public isAdjacent(vertex: IVertex): boolean {
     if (this._graphReference == null) return false;
+    let result = false;
     this._graphReference.edges.forEach(e => {
       if (e.vertexOne.equals(this) && e.vertexTwo.equals(vertex)||
-      e.vertexTwo.equals(this) && e.vertexOne.equals(vertex)) return true;
+      e.vertexTwo.equals(this) && e.vertexOne.equals(vertex)) {
+        result = true;
+      }
     });
-    return false;
+    return result;
   }
 
   /**

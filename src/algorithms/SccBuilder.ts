@@ -2,6 +2,7 @@ import {IGraph} from "../types/IGraph";
 import {IVertex} from "../types/IVertex";
 import {DirectedGraph} from "../main/DirectedGraph";
 import {UndirectedGraph} from "../main/UndirectedGraph";
+import {IEdge} from "../types/IEdge";
 
 /**
  * @classdesc
@@ -13,18 +14,18 @@ export class SccBuilder {
      * @param graph
      * @returns {IGraph[]}
      */
-    public static findComponents(graph: IGraph): IGraph[] {
+    public static findComponents(graph: IGraph<IVertex, IEdge>): IGraph<IVertex, IEdge>[] {
         return (new SccBuilder(graph)).buildComponents();
     }
 
     private readonly _accessibilityMatrix: number[][];
-    private readonly _graph: IGraph;
+    private readonly _graph: IGraph<IVertex, IEdge>;
     private readonly _vertices: IVertex[];
 
-    private constructor(graph: IGraph) {
+    private constructor(graph: IGraph<IVertex, IEdge>) {
         this._graph = graph;
         this._vertices = this._graph.vertices;
-        this._accessibilityMatrix = new [this._graph.verticesNumber, this._graph.verticesNumber];
+        this._accessibilityMatrix = [new Array(this._graph.verticesNumber), new Array(this._graph.verticesNumber)];
     }
 
     private  buildAccessibilityMatrix(startIndex: number, currentIndex: number): void {
@@ -33,7 +34,7 @@ export class SccBuilder {
         for (let i: number = 0; i < this._graph.verticesNumber; i++)
         {
             if (i == startIndex ||
-                this._graph[currentVertex][this._vertices[i]] == null ||
+                this._graph.getEdge(currentVertex, this._vertices[i]) == null ||
                 this._accessibilityMatrix[startIndex][i] != 0)
             {
                 continue;
@@ -45,13 +46,13 @@ export class SccBuilder {
     }
 
     //TODO: кажется, тут местами можно немного проще сделать
-    private buildComponents(): IGraph[] {
+    private buildComponents(): IGraph<IVertex, IEdge>[] {
         for (let i: number = 0; i < this._graph.verticesNumber; i++)
         {
             this.buildAccessibilityMatrix(i, i);
         }
 
-        const s: number[][] = new [this._graph.verticesNumber, this._graph.verticesNumber];
+        const s: number[][] = [new Array(this._graph.verticesNumber), new Array(this._graph.verticesNumber)];
 
 
         for (let i: number = 0; i < this._graph.verticesNumber; i++)
@@ -62,18 +63,18 @@ export class SccBuilder {
             }
         }
 
-        const added: boolean[] = new [this._graph.verticesNumber];
+        const added: boolean[] = new Array(this._graph.verticesNumber);
         for (let i: number = 0; i < added.length; i++)
         {
             added[i] = false;
         }
 
-        const components: IGraph[] = [];
+        const components: IGraph<IVertex, IEdge>[] = [];
         for (let i: number = 0; i < this._graph.verticesNumber; i++)
         {
             if (added[i])
                 continue;
-            const scc: IGraph = this._graph.isDirected
+            const scc: IGraph<IVertex, IEdge> = this._graph.isDirected
                 ? new DirectedGraph()
                 : new UndirectedGraph();
 
