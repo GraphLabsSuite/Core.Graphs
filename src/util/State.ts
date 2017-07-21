@@ -138,55 +138,57 @@ export class State {
      */
     public clone(): State
     {
-        return new State(this);
+        return new State(null, this);
     }
 
     /**
      * @constructor
      * Initialising parameters for the algorithm
      * @param graph
+     * @param prototype
      */
-    public constructor(graph: UndirectedGraph) {
-        this._verticesList = graph.vertices;
-        this._tempDs = [];
-        this._vertexColors = [];
-        this._vertexDominatedNumber = [];
-        this._vertexNeighbors = [];
-        this._vertexPossibleDominatingNumber = [];
-        this.level = 0;
-        for (const vertex of graph.vertices) {
-            this._vertexColors[vertex.id.idValue] = StateColor.WHITE;
-            this._vertexDominatedNumber[vertex.id.idValue] = 0;
-            const tempNeighbors: IVertex[] = [];
-            for (let i = 0; i < graph.verticesNumber; i++) {
-                if (graph.getEdge(graph.vertices[i], vertex) != null) tempNeighbors.push(graph.vertices[i]);
+    public constructor(graph?: UndirectedGraph, prototype?: State) {
+        if (graph != null) {
+            this._verticesList = graph.vertices;
+            this._tempDs = [];
+            this._vertexColors = [];
+            this._vertexDominatedNumber = [];
+            this._vertexNeighbors = [];
+            this._vertexPossibleDominatingNumber = [];
+            this.level = 0;
+            for (const vertex of graph.vertices) {
+                this._vertexColors[vertex.id.idValue] = StateColor.WHITE;
+                this._vertexDominatedNumber[vertex.id.idValue] = 0;
+                const tempNeighbors: IVertex[] = [];
+                for (let i = 0; i < graph.verticesNumber; i++) {
+                    if (graph.getEdge(graph.vertices[i], vertex) != null) tempNeighbors.push(graph.vertices[i]);
+                }
+                this._vertexNeighbors[vertex.id.idValue] = tempNeighbors;
+                this._vertexPossibleDominatingNumber[vertex.id.idValue] = tempNeighbors.length + 1;
             }
-            this._vertexNeighbors[vertex.id.idValue] = tempNeighbors;
-            this._vertexPossibleDominatingNumber[vertex.id.idValue] = tempNeighbors.length + 1;
+            this.nDominated = 0;
         }
-        this.nDominated = 0;
-    }
-
-    private constructor(prototype: State) {
-        this.level = prototype.level;
-        this.nDominated = prototype.nDominated;
-        this._tempDs = [];
-        prototype._tempDs.forEach(ds => this._tempDs.push(ds));
-        this._vertexColors = {};
-        for (const key in prototype._vertexColors) {
-            this._vertexColors[key] = prototype._vertexColors[key];
-        }
-        this._vertexNeighbors = {};
-        for (const key in prototype._vertexNeighbors) {
-            this._vertexNeighbors[key] = prototype._vertexNeighbors[key];
-        }
-        this._vertexDominatedNumber = {};
-        for (const key in prototype._vertexDominatedNumber) {
-            this._vertexDominatedNumber[key] = prototype._vertexDominatedNumber[key];
-        }
-        this._vertexPossibleDominatingNumber = {};
-        for (const key in prototype._vertexPossibleDominatingNumber) {
-            this._vertexPossibleDominatingNumber[key] = prototype._vertexPossibleDominatingNumber[key];
+        if (prototype != null) {
+            this.level = prototype.level;
+            this.nDominated = prototype.nDominated;
+            this._tempDs = [];
+            prototype._tempDs.forEach(ds => this._tempDs.push(ds));
+            this._vertexColors = {};
+            for (const key in prototype._vertexColors) {
+                this._vertexColors[key] = prototype._vertexColors[key];
+            }
+            this._vertexNeighbors = {};
+            for (const key in prototype._vertexNeighbors) {
+                this._vertexNeighbors[key] = prototype._vertexNeighbors[key];
+            }
+            this._vertexDominatedNumber = {};
+            for (const key in prototype._vertexDominatedNumber) {
+                this._vertexDominatedNumber[key] = prototype._vertexDominatedNumber[key];
+            }
+            this._vertexPossibleDominatingNumber = {};
+            for (const key in prototype._vertexPossibleDominatingNumber) {
+                this._vertexPossibleDominatingNumber[key] = prototype._vertexPossibleDominatingNumber[key];
+            }
         }
     }
 }

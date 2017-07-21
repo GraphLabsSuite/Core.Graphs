@@ -40,6 +40,7 @@ export class UndirectedGraph extends Graph<Vertex, UndirectedEdge> {
   }
 
   /**
+   * @override
    * Returns the copy of the graph
    * @returns {UndirectedGraph}
    */

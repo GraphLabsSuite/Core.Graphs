@@ -3,6 +3,9 @@ import {IVertex} from "../types/IVertex";
 import {DirectedGraph} from "../main/DirectedGraph";
 import {UndirectedGraph} from "../main/UndirectedGraph";
 import {IEdge} from "../types/IEdge";
+import {Vertex} from "../main/Vertex";
+import {Graph} from "../main/Graph";
+import {UndirectedEdge} from "../main/UndirectedEdge";
 
 /**
  * @classdesc
@@ -74,9 +77,10 @@ export class SccBuilder {
         {
             if (added[i])
                 continue;
-            const scc: IGraph<IVertex, IEdge> = this._graph.isDirected
-                ? new DirectedGraph()
-                : new UndirectedGraph();
+            // const scc: IGraph<IVertex, IEdge> = this._graph.isDirected
+            //     ? new DirectedGraph()
+            //     : new UndirectedGraph();
+            const scc: IGraph<IVertex, IEdge> = new Graph<Vertex,UndirectedEdge>();
 
             added[i] = true;
             scc.addVertex(this._vertices[i]);

@@ -256,8 +256,7 @@ export class Graph<T extends IVertex, K extends IEdge> implements IGraph<T,K> {
    * @returns {IGraph[]}
    */
   public buildSCC(): IGraph<IVertex, IEdge>[] {
-    // return SccBuilder.findComponents(this);
-    return [];
+    return SccBuilder.findComponents(this);
   }
 
   public print(): void {

@@ -22,7 +22,7 @@ export class DirectedGraph extends Graph<Vertex, DirectedEdge> {
    * @param vertexTwo
    * @returns {DirectedEdge}
    */
-  public getDirectEdge(vertexOne: IVertex, vertexTwo: IVertex): DirectedEdge {
+  public getEdge(vertexOne: IVertex, vertexTwo: IVertex): DirectedEdge {
     return <DirectedEdge> this.edges.filter(a => a.vertexTwo == vertexTwo && a.vertexOne == vertexOne)[0];
   }
 

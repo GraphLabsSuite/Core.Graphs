@@ -57,12 +57,12 @@ export class MinDSEvaluator {
      * @returns {boolean}
      */
     private canVertexBeCovered(vertex: IVertex, state: State): boolean {
-        const neighbors: IVertex[] = state.vertexNeighbors[vertex];
-        const vertDomNum: number = state.vertexPossibleDominatingNumber[vertex];
+        const neighbors: IVertex[] = state.vertexNeighbors(vertex);
+        const vertDomNum: number = state.vertexPossibleDominatingNumber(vertex);
         if (vertDomNum == 0) return false;
         if (neighbors != null)
             for (const neigh of neighbors) {
-                const neighVertDomNum: number = state.vertexPossibleDominatingNumber[neigh];
+                const neighVertDomNum: number = state.vertexPossibleDominatingNumber(neigh);
                 if (neighVertDomNum == 0) return false;
             }
         return true;
