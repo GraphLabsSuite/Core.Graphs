@@ -31,7 +31,7 @@ export class MinDSEvaluator {
     public constructor(graph: UndirectedGraph) {
         this._minDs = [];
         this._delta = 0;
-        this._n = graph.verticesNumber;
+        this._n = graph.vertices.length;
         const tempDs: IVertex[] = [];
         for (let i: number = 0; i < this._n; i++) {
             tempDs.push(graph.vertices[i]);

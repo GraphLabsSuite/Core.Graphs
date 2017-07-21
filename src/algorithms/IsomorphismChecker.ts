@@ -43,7 +43,7 @@ export class IsomorphismChecker {
 
     public static directCompare(graphOne: IGraph<IVertex, IEdge>, graphTwo: IGraph<IVertex, IEdge>): boolean {
         let equals: number = 0;
-        const count: number = graphOne.edgesNumber;
+        const count: number = graphOne.edges.length;
         for (let i: number = 0; i < count; i++)
         for (let j: number = 0; j < count; j++)
         if (IsomorphismChecker.compareHelper(graphOne.edges[i].vertexOne, graphTwo.edges[j].vertexOne) &&
@@ -58,7 +58,7 @@ export class IsomorphismChecker {
     }
 
     public static checkIsomorphism(graphOne: IGraph<IVertex, IEdge>, graphTwo: IGraph<IVertex, IEdge>): boolean {
-        if (graphOne.verticesNumber != graphTwo.verticesNumber || graphOne.edgesNumber != graphTwo.edgesNumber)
+        if (graphOne.vertices.length != graphTwo.vertices.length || graphOne.edges.length != graphTwo.edges.length)
             return false;
         IsomorphismChecker.permute(graphOne.vertices).forEach(perm => {
             IsomorphismChecker.updateBijection(perm, graphTwo.vertices);

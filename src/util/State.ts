@@ -160,7 +160,7 @@ export class State {
                 this._vertexColors[vertex.id.idValue] = StateColor.WHITE;
                 this._vertexDominatedNumber[vertex.id.idValue] = 0;
                 const tempNeighbors: IVertex[] = [];
-                for (let i = 0; i < graph.verticesNumber; i++) {
+                for (let i = 0; i < graph.vertices.length; i++) {
                     if (graph.getEdge(graph.vertices[i], vertex) != null) tempNeighbors.push(graph.vertices[i]);
                 }
                 this._vertexNeighbors[vertex.id.idValue] = tempNeighbors;

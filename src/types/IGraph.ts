@@ -24,22 +24,10 @@ export interface IGraph<T extends IVertex, K extends IEdge> extends IGraphStatic
   /**
    * @property
    * @public
-   * The amount of edges in the graph
-   */
-  edgesNumber: number;
-  /**
-   * @property
-   * @public
    * The list of edges in the graph
    */
   edges: K[];
 
-  /**
-   * @property
-   * @public
-   * The amount of vertices in the graph
-   */
-  verticesNumber: number;
   /**
    * @property
    * @public

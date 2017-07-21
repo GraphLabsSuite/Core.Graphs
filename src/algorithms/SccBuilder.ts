@@ -3,9 +3,6 @@ import {IVertex} from "../types/IVertex";
 import {DirectedGraph} from "../main/DirectedGraph";
 import {UndirectedGraph} from "../main/UndirectedGraph";
 import {IEdge} from "../types/IEdge";
-import {Vertex} from "../main/Vertex";
-import {Graph} from "../main/Graph";
-import {UndirectedEdge} from "../main/UndirectedEdge";
 
 /**
  * @classdesc
@@ -28,72 +25,60 @@ export class SccBuilder {
     private constructor(graph: IGraph<IVertex, IEdge>) {
         this._graph = graph;
         this._vertices = this._graph.vertices;
-        this._accessibilityMatrix = [new Array(this._graph.verticesNumber), new Array(this._graph.verticesNumber)];
+        this._accessibilityMatrix = SccBuilder.buildAdjacencyMatrix(graph);
     }
 
-    private  buildAccessibilityMatrix(startIndex: number, currentIndex: number): void {
-        const currentVertex: IVertex = this._vertices[currentIndex];
-
-        for (let i: number = 0; i < this._graph.verticesNumber; i++)
-        {
-            if (i == startIndex ||
-                this._graph.getEdge(currentVertex, this._vertices[i]) == null ||
-                this._accessibilityMatrix[startIndex][i] != 0)
-            {
-                continue;
+    public static buildAdjacencyMatrix(graph: IGraph<IVertex, IEdge>): number[][] {
+        const result: number[][] = [];
+        for (let i: number = 0; i < graph.vertices.length; i++) {
+            result[i] = [];
+            for (let j: number = 0; j < graph.vertices.length; j++) {
+                if (i == j) {
+                    result[i][j] = 1;
+                    continue;
+                }
+                if (graph.vertices[j].isAdjacent(graph.vertices[i])) {
+                    result[i][j] = 1;
+                    continue;
+                }
+                result[i][j] = 0;
             }
-
-            this._accessibilityMatrix[startIndex][i] = 1;
-            this.buildAccessibilityMatrix(startIndex, i);
         }
+        return result;
     }
 
     //TODO: кажется, тут местами можно немного проще сделать
     private buildComponents(): IGraph<IVertex, IEdge>[] {
-        for (let i: number = 0; i < this._graph.verticesNumber; i++)
-        {
-            this.buildAccessibilityMatrix(i, i);
-        }
-
-        const s: number[][] = [new Array(this._graph.verticesNumber), new Array(this._graph.verticesNumber)];
-
-
-        for (let i: number = 0; i < this._graph.verticesNumber; i++)
-        {
-            for (let j: number = 0; j < this._graph.verticesNumber; ++j)
-            {
+        const s: number[][] = [];
+        for (let i: number = 0; i < this._graph.vertices.length; i++) {
+            s[i] = [];
+            for (let j: number = 0; j < this._graph.vertices.length; j++)
                 s[i][j] = this._accessibilityMatrix[i][j] * this._accessibilityMatrix[j][i];
-            }
         }
 
-        const added: boolean[] = new Array(this._graph.verticesNumber);
+        const added: boolean[] = new Array(this._graph.vertices.length);
         for (let i: number = 0; i < added.length; i++)
-        {
             added[i] = false;
-        }
 
         const components: IGraph<IVertex, IEdge>[] = [];
-        for (let i: number = 0; i < this._graph.verticesNumber; i++)
-        {
+        for (let i: number = 0; i < this._graph.vertices.length; i++) {
             if (added[i])
                 continue;
-            // const scc: IGraph<IVertex, IEdge> = this._graph.isDirected
-            //     ? new DirectedGraph()
-            //     : new UndirectedGraph();
-            const scc: IGraph<IVertex, IEdge> = new Graph<Vertex,UndirectedEdge>();
+            const scc: IGraph<IVertex, IEdge> = this._graph.isDirected
+                ? new DirectedGraph()
+                : new UndirectedGraph();
+            // const scc: IGraph<IVertex, IEdge> = new Graph<Vertex,UndirectedEdge>();
 
             added[i] = true;
             scc.addVertex(this._vertices[i]);
-            for (let j: number = 0; j < this._graph.verticesNumber; j++)
-            {
-                if (!added[j] && s[i][j] == 1)
-                {
+            for (let j: number = 0; j < this._graph.vertices.length; j++)
+                if (!added[j] && s[i][j] == 1) {
                     added[j] = true;
                     scc.addVertex(this._vertices[j]);
                 }
-            }
             components.push(scc);
         }
+
         this._graph.edges.forEach(edge => {
             const whereToAdd =
                 components.filter(c => c.vertices.indexOf(edge.vertexOne) != -1 &&

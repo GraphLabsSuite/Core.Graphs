@@ -5,10 +5,11 @@ import {IGraph} from "../types/IGraph";
 import {Vertex} from "./Vertex";
 import {SccBuilder} from "../algorithms/SccBuilder";
 import {IsomorphismChecker} from "../algorithms/IsomorphismChecker";
+import {Edge} from "./Edge";
 
 /** @classdesc
  * Graph implementation of the IGraph interface */
-export class Graph<T extends IVertex, K extends IEdge> implements IGraph<T,K> {
+export class Graph<T extends Vertex, K extends Edge> implements IGraph<T,K> {
   /** @property
    *  @private
    * Mark shows whether graph edges are directed or not */
@@ -53,26 +54,6 @@ export class Graph<T extends IVertex, K extends IEdge> implements IGraph<T,K> {
    */
   public get vertices(): T[] {
     return this._vertices;
-  }
-
-  /**
-   * @property
-   * @public
-   * Getter for edges number in the graph
-   * @return {number}
-   */
-  public get edgesNumber(): number {
-    return this._vertices.length;
-  }
-
-  /**
-   * @property
-   * @public
-   * Getter for vertices number in the graph
-   * @return {number}
-   */
-  public get verticesNumber(): number {
-    return this._vertices.length;
   }
 
   /**
@@ -209,7 +190,7 @@ export class Graph<T extends IVertex, K extends IEdge> implements IGraph<T,K> {
    * @return {DirectedWeightedGraph}
    */
   public static createEmpty(verticesNumber: number): IGraph<IVertex, IEdge> {
-    const newGraph = new Graph<IVertex, IEdge>();
+    const newGraph = new Graph<Vertex, Edge>();
     for (let i = 0; i < verticesNumber; ++i)
       newGraph.addVertex(new Vertex(i.toString(verticesNumber)));
     return newGraph;
@@ -256,7 +237,8 @@ export class Graph<T extends IVertex, K extends IEdge> implements IGraph<T,K> {
    * @returns {IGraph[]}
    */
   public buildSCC(): IGraph<IVertex, IEdge>[] {
-    return SccBuilder.findComponents(this);
+    // return SccBuilder.findComponents(this); //TODO: fix the bug with TypeError: Object prototype may only be an Object or null: undefined
+    return [];
   }
 
   public print(): void {
@@ -264,14 +246,14 @@ export class Graph<T extends IVertex, K extends IEdge> implements IGraph<T,K> {
   }
 
   public toString(): string {
-    let verticesListStr: string = this.vertices.join(',');
-    if (verticesListStr.length == 0) verticesListStr = "\x00D8";
+    let verticesListStr: string = '{' + this.vertices.join(',') + '}';
+    if (verticesListStr.length == 0) verticesListStr = "\u2205";
 
     let edgesListStr = "";
-    this.edges.forEach(g => edgesListStr.concat(g.vertexOne + "," + g.vertexTwo));
-    if (edgesListStr.length == 0) edgesListStr = "\x00D8";
+    this.edges.forEach(g => edgesListStr.concat(`[${g.vertexOne}, ${g.vertexTwo}]`));
+    if (edgesListStr.length == 0) edgesListStr = "\u2205";
 
-    return verticesListStr + "," + edgesListStr;
+    return `(${verticesListStr}, ${edgesListStr})`;
   }
 
   /**
