@@ -246,14 +246,14 @@ export class Graph<T extends Vertex, K extends Edge> implements IGraph<T,K> {
   }
 
   public toString(): string {
-    let verticesListStr: string = '{' + this.vertices.join(',') + '}';
+    let verticesListStr: string = '[' + this.vertices.join(',') + ']';
     if (verticesListStr.length == 0) verticesListStr = "\u2205";
 
     let edgesListStr = "";
-    this.edges.forEach(g => edgesListStr.concat(`[${g.vertexOne}, ${g.vertexTwo}]`));
-    if (edgesListStr.length == 0) edgesListStr = "\u2205";
+    this.edges.forEach(g => edgesListStr = edgesListStr + `{${g.vertexOne},${g.vertexTwo}}`);
+    edgesListStr = (edgesListStr.length == 0) ? "\u2205" : `[${edgesListStr}]`;
 
-    return `(${verticesListStr}, ${edgesListStr})`;
+    return `(${verticesListStr},${edgesListStr})`;
   }
 
   /**

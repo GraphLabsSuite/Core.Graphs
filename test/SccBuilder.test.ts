@@ -10,8 +10,8 @@ describe("SccBuilder", () => {
        const graph: UndirectedGraph = new UndirectedGraph();
        const v1 = new Vertex("1", graph);
        const v2 = new Vertex("2", graph);
-       const v3 = new Vertex("1", graph);
-       const v4 = new Vertex("2", graph);
+       const v3 = new Vertex("3", graph);
+       const v4 = new Vertex("4", graph);
        graph.addVertex(v1);
        graph.addVertex(v2);
        graph.addVertex(v3);
@@ -22,8 +22,8 @@ describe("SccBuilder", () => {
        graph.addEdge(e1);
        graph.addEdge(e2);
        graph.addEdge(e3);
-       // const d: IGraph<IVertex, IEdge>[] = SccBuilder.findComponents(graph);
+       const d: IGraph<IVertex, IEdge>[] = SccBuilder.findComponents(graph);
        // console.log(d.toString());
-       console.log(graph);
+       graph.print();
    });
 });
