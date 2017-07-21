@@ -9,7 +9,7 @@ import {Graph} from "../src/main/Graph";
 describe('Vertex', () => {
 
     describe('#isAdjacent', () => {
-        const graph: IGraph<IVertex, IEdge> = new Graph<IVertex, IEdge>();
+        const graph: IGraph<IVertex, IEdge> = new Graph<Vertex, Edge>();
         const vertexOne = new Vertex("", graph);
         const vertexTwo = new Vertex("", graph);
         const vertexThree = new Vertex("", graph);

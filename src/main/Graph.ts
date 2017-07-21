@@ -6,6 +6,7 @@ import {Vertex} from "./Vertex";
 import {SccBuilder} from "../algorithms/SccBuilder";
 import {IsomorphismChecker} from "../algorithms/IsomorphismChecker";
 import {Edge} from "./Edge";
+import {UndirectedGraph} from "./UndirectedGraph";
 
 /** @classdesc
  * Graph implementation of the IGraph interface */
@@ -237,7 +238,7 @@ export class Graph<T extends Vertex, K extends Edge> implements IGraph<T,K> {
    * @returns {IGraph[]}
    */
   public buildSCC(): IGraph<IVertex, IEdge>[] {
-    // return SccBuilder.findComponents(this); //TODO: fix the bug with TypeError: Object prototype may only be an Object or null: undefined
+    //TODO: fix the bug with TypeError: Object prototype may only be an Object or null: undefined
     return [];
   }
 
@@ -259,7 +260,8 @@ export class Graph<T extends Vertex, K extends Edge> implements IGraph<T,K> {
   /**
    * Deep graph-cloning
    */
-  public clone() {
+  public clone(): IGraph<IVertex, IEdge> {
+    return new Graph<Vertex, Edge>();
     //TODO: implementation (or abstract?)
   }
 }

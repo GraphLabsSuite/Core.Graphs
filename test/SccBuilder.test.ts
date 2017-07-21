@@ -1,12 +1,10 @@
+import * as chai from "chai";
 import {SccBuilder} from "../src/algorithms/SccBuilder";
 import {UndirectedGraph} from "../src/main/UndirectedGraph";
 import {Vertex} from "../src/main/Vertex";
 import {Edge} from "../src/main/Edge";
-import {IEdge} from "../src/types/IEdge";
-import {IVertex} from "../src/types/IVertex";
-import {IGraph} from "../src/types/IGraph";
 describe("SccBuilder", () => {
-   describe("", () => {
+   describe("#findComponents();", () => {
        const graph: UndirectedGraph = new UndirectedGraph();
        const v1 = new Vertex("1", graph);
        const v2 = new Vertex("2", graph);
@@ -22,8 +20,9 @@ describe("SccBuilder", () => {
        graph.addEdge(e1);
        graph.addEdge(e2);
        graph.addEdge(e3);
-       const d: IGraph<IVertex, IEdge>[] = SccBuilder.findComponents(graph);
-       // console.log(d.toString());
-       graph.print();
+
+       it("Two SCC should exist on the graph", () => {
+           chai.assert(SccBuilder.findComponents(graph).length == 2);
+       })
    });
 });

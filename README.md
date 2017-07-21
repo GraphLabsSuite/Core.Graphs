@@ -4,6 +4,10 @@ The graph library of the GraphLabs project
 ### Installation
 * npm install graphlabs.core.graphs
 
+* (for testing only):
+    * npm install -g mocha
+    * npm install -g ts-node
+
 ### Content
 * JSON types
     * GraphJSON - representation of the whole graph in JSON format

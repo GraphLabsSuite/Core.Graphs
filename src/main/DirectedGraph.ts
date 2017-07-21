@@ -2,6 +2,10 @@ import {Graph} from "./Graph";
 import {Vertex} from "./Vertex";
 import {DirectedEdge} from "./DirectedEdge";
 import {IVertex} from "../types/IVertex";
+import {UndirectedGraph} from "./UndirectedGraph";
+import {SccBuilder} from "../algorithms/SccBuilder";
+import {IGraph} from "../types/IGraph";
+import {IEdge} from "../types/IEdge";
 
 /**
  * Directed graph
@@ -24,6 +28,10 @@ export class DirectedGraph extends Graph<Vertex, DirectedEdge> {
    */
   public getEdge(vertexOne: IVertex, vertexTwo: IVertex): DirectedEdge {
     return <DirectedEdge> this.edges.filter(a => a.vertexTwo == vertexTwo && a.vertexOne == vertexOne)[0];
+  }
+
+  public buildSCC(): IGraph<IVertex, IEdge>[] {
+    return SccBuilder.findComponents(this);
   }
 
   /**

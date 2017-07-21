@@ -4,6 +4,9 @@ import {Graph} from "./Graph";
 import {IVertex} from "../types/IVertex";
 import {DirectedEdge} from "./DirectedEdge";
 import {MinDSEvaluator} from "../algorithms/MinDSEvaluator";
+import {SccBuilder} from "../algorithms/SccBuilder";
+import {IGraph} from "../types/IGraph";
+import {IEdge} from "../types/IEdge";
 
 /**
  * @classdesc
@@ -27,6 +30,10 @@ export class UndirectedGraph extends Graph<Vertex, UndirectedEdge> {
    */
   public getEdge(vertexOne: IVertex, vertexTwo: IVertex): UndirectedEdge {
     return <UndirectedEdge> this.edges.filter(a => a.vertexTwo == vertexTwo && a.vertexOne == vertexOne)[0];
+  }
+
+  public buildSCC(): IGraph<IVertex, IEdge>[] {
+    return SccBuilder.findComponents(this);
   }
 
   /**
