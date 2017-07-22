@@ -137,7 +137,7 @@ export class Vertex implements IVertex {
    * Deep vertex-cloning
    * @returns {Vertex}
    */
-  public clone(): IVertex {
+  public clone(): Vertex {
     return new Vertex(this.name);
   }
 

@@ -53,11 +53,11 @@ export class UndirectedGraph extends Graph<Vertex, UndirectedEdge> {
    */
   public clone(): UndirectedGraph {
     const clone = new UndirectedGraph();
-    this.vertices.forEach(v => clone.addVertex(new Vertex(v.name)));
+    this.vertices.forEach(v => clone.addVertex(v.clone()));
     for (const edge of this.edges)
     {
-      const v1 = clone.vertices.filter(edge.vertexOne.equals)[0];//First
-      const v2 = clone.vertices.filter(edge.vertexTwo.equals)[0];
+      const v1 = clone.vertices.filter(v => edge.vertexOne.equals(v))[0];//First
+      const v2 = clone.vertices.filter(v => edge.vertexTwo.equals(v))[0];
       clone.addEdge(new UndirectedEdge(v1, v2));
     }
 

@@ -40,7 +40,7 @@ export class DirectedGraph extends Graph<Vertex, DirectedEdge> {
    */
   public clone(): DirectedGraph {
     const clone = new DirectedGraph();
-    this.vertices.forEach(v => clone.addVertex(new Vertex(v.name)));
+    this.vertices.forEach(v => clone.addVertex(v.clone()));
     for (const edge of this.edges)
     {
       const v1 = clone.vertices.filter(edge.vertexOne.equals)[0]; //Single?

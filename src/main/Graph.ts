@@ -99,7 +99,7 @@ export class Graph<T extends Vertex, K extends Edge> implements IGraph<T,K> {
     do {
       edgeOut = this.edges.pop();
       edges.push(edgeOut);
-    } while (!edgeOut.equals(edge));
+    } while (edgeOut === undefined || !edgeOut.equals(edge));
     edges.forEach(e => {
       if (!e.equals(edgeOut))
         this.edges.push(e)
@@ -146,15 +146,22 @@ export class Graph<T extends Vertex, K extends Edge> implements IGraph<T,K> {
   public removeVertex(vertex: T): void {
     let vertices: T[] = [];
     let vertexOut: T = null;
-    do {
-      vertexOut = this.vertices.pop();
-      vertices.push(vertexOut);
-    } while (!vertexOut.equals(vertex));
-    vertices.forEach(v => {
-      if (!v.equals(vertexOut)) {
-        this.vertices.push(v)
+    if (this._vertices.length > 0) {
+      do {
+        vertexOut = this._vertices.pop();
+        vertices.push(vertexOut);
+      } while (vertexOut === undefined || !vertexOut.equals(vertex));
+      vertices.forEach(v => {
+        if (!v.equals(vertexOut)) {
+          this.vertices.push(v)
+        }
+      });
+    }
+    this._edges.forEach(e => {
+      if (e.isIncident(vertex)) {
+        this.removeEdge(e);
       }
-    });
+    })
   }
 
   /**
@@ -165,12 +172,11 @@ export class Graph<T extends Vertex, K extends Edge> implements IGraph<T,K> {
   public static unionN(graphs: IGraph<IVertex, IEdge>[]): IGraph<IVertex, IEdge> {
     if (graphs.length < 2) return Graph.createEmpty(0);
     //TODO: Think about contracts or asserts
-    const copies = graphs.map(g => g.clone());
-    const result = copies[0];
-    for (let i = 1; i < copies.length; i++)
-    {
-      copies[i].vertices.forEach(result.addVertex);
-      copies[i].edges.forEach(result.addEdge);
+    const copies: Graph<Vertex, Edge>[] = graphs.map(g => <Graph<Vertex, Edge>> g.clone());
+    const result: Graph<Vertex, Edge> = copies[0];
+    for (let i = 1; i < copies.length; i++) {
+      copies[i].vertices.forEach(v => result.addVertex(v));
+      copies[i].edges.forEach(e => result.addEdge(e));
     }
 
     return result;
@@ -184,12 +190,11 @@ export class Graph<T extends Vertex, K extends Edge> implements IGraph<T,K> {
   public static intersectN(graphs: IGraph<IVertex, IEdge>[]): IGraph<IVertex, IEdge> {
     if (graphs.length < 2) return Graph.createEmpty(0);
     //TODO: Think about contracts or asserts
-    const copies = graphs.map(g => g.clone());
-    const result = copies[0];
-    for (let i = 1; i < copies.length; i++)
-    {
-      copies[i].vertices.forEach(result.removeVertex);
-      copies[i].edges.forEach(result.removeEdge);
+    const copies: Graph<Vertex, Edge>[] = graphs.map(g => <Graph<Vertex, Edge>> g.clone());
+    const result: Graph<Vertex, Edge> = copies[0];
+    for (let i = 1; i < copies.length; i++) {
+      copies[i].vertices.forEach(v => result.removeVertex(v));
+      copies[i].edges.forEach(e => result.removeEdge(e));
     }
 
     return result;
@@ -272,7 +277,15 @@ export class Graph<T extends Vertex, K extends Edge> implements IGraph<T,K> {
    * Deep graph-cloning
    */
   public clone(): IGraph<IVertex, IEdge> {
-    return new Graph<Vertex, Edge>();
-    //TODO: implementation (or abstract?)
+    const clone = new Graph<Vertex, Edge>();
+    this.vertices.forEach(v => clone.addVertex(v.clone()));
+    for (const edge of this.edges)
+    {
+      const v1 = clone.vertices.filter(v => edge.vertexOne.equals(v))[0]; //Single?
+      const v2 = clone.vertices.filter(v => edge.vertexTwo.equals(v))[0];
+      clone.addEdge(new Edge(v1, v2));
+    }
+
+    return clone;
   }
 }
