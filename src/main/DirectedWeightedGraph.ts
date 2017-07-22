@@ -55,8 +55,8 @@ export class DirectedWeightedGraph extends Graph<IVertex, IWeightedEdge> {
    * @param vertexOne
    * @param vertexTwo
    */
-  public getEdge(vertexOne: IVertex, vertexTwo: IVertex): DirectedWeightedEdge {
-    return <DirectedWeightedEdge> super.edges.filter(a => a.vertexTwo == vertexTwo && a.vertexOne == vertexOne)[0];
+  public getEdge(vertexOne: IVertex, vertexTwo: IVertex): DirectedWeightedEdge[] {
+    return this.edges.filter(a => a.vertexTwo.equals(vertexTwo) && a.vertexOne.equals(vertexOne)); //TODO: why is it so?
   }
 
   /**

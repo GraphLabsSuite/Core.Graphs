@@ -76,6 +76,11 @@ export class Graph<T extends Vertex, K extends Edge> implements IGraph<T,K> {
     this._isDirected = directed == null ? false : directed;
   }
 
+  public clear(): void {
+     this._vertices = [];
+     this._edges = [];
+  }
+
   /**
    * Adds the edge to the graph
    * @param edge
@@ -94,8 +99,11 @@ export class Graph<T extends Vertex, K extends Edge> implements IGraph<T,K> {
     do {
       edgeOut = this.edges.pop();
       edges.push(edgeOut);
-    } while (edgeOut != edge);
-    edges.forEach(e => this.edges.push(e));
+    } while (!edgeOut.equals(edge));
+    edges.forEach(e => {
+      if (!e.equals(edgeOut))
+        this.edges.push(e)
+    });
   }
 
   /**
@@ -103,10 +111,10 @@ export class Graph<T extends Vertex, K extends Edge> implements IGraph<T,K> {
    * @param vertexOne
    * @param vertexTwo
    */
-  public getEdge(vertexOne: T, vertexTwo: T): K {
-    let result: K = null;
+  public getEdge(vertexOne: T, vertexTwo: T): K[] {
+    let result: K[] = [];
     this.edges.forEach(edge => {
-      if (edge.vertexOne == vertexOne && edge.vertexTwo == vertexTwo) result = edge;
+      if (edge.vertexOne == vertexOne && edge.vertexTwo == vertexTwo) result.push(edge);
     });
     return result;
   }
@@ -118,9 +126,8 @@ export class Graph<T extends Vertex, K extends Edge> implements IGraph<T,K> {
    */
   public getVertex(name: string): T[] {
     let verticesOut: T[] = [];
-    for (const v of this.vertices) {
-      if (v.name === name) verticesOut.push(v);
-    }
+    for (const v of this.vertices)
+      if (v.name == name) verticesOut.push(v);
     return verticesOut;
   }
 
@@ -142,8 +149,12 @@ export class Graph<T extends Vertex, K extends Edge> implements IGraph<T,K> {
     do {
       vertexOut = this.vertices.pop();
       vertices.push(vertexOut);
-    } while (vertexOut != vertex);
-    vertices.forEach(v => this.vertices.push(v));
+    } while (!vertexOut.equals(vertex));
+    vertices.forEach(v => {
+      if (!v.equals(vertexOut)) {
+        this.vertices.push(v)
+      }
+    });
   }
 
   /**

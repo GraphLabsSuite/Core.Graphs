@@ -26,8 +26,8 @@ export class DirectedGraph extends Graph<Vertex, DirectedEdge> {
    * @param vertexTwo
    * @returns {DirectedEdge}
    */
-  public getEdge(vertexOne: IVertex, vertexTwo: IVertex): DirectedEdge {
-    return <DirectedEdge> this.edges.filter(a => a.vertexTwo == vertexTwo && a.vertexOne == vertexOne)[0];
+  public getEdge(vertexOne: IVertex, vertexTwo: IVertex): DirectedEdge[] {
+    return this.edges.filter(a => a.vertexTwo.equals(vertexTwo) && a.vertexOne.equals(vertexOne));
   }
 
   public buildSCC(): IGraph<IVertex, IEdge>[] {

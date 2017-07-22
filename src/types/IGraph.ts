@@ -54,7 +54,7 @@ export interface IGraph<T extends IVertex, K extends IEdge> extends IGraphStatic
    * @param verticeTwo
    * @returns {K}
    */
-  getEdge: (verticeOne: T, verticeTwo: T)=> K;
+  getEdge: (verticeOne: T, verticeTwo: T)=> K[];
 
   /**
    * @public

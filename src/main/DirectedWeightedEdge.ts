@@ -1,11 +1,12 @@
 import {Edge} from "./Edge";
 import {IVertex} from "../types/IVertex";
+import {IWeightedEdge} from "../types/IWeightedEdge";
 
 /**
  * @classdesc
  * Directed weighted edge
  */
-export class DirectedWeightedEdge extends Edge {
+export class DirectedWeightedEdge extends Edge implements IWeightedEdge {
 
   /**
    * @property

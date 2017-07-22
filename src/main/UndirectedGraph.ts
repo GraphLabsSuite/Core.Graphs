@@ -28,8 +28,8 @@ export class UndirectedGraph extends Graph<Vertex, UndirectedEdge> {
    * @param vertexTwo
    * @returns {DirectedEdge}
    */
-  public getEdge(vertexOne: IVertex, vertexTwo: IVertex): UndirectedEdge {
-    return <UndirectedEdge> this.edges.filter(a => a.vertexTwo == vertexTwo && a.vertexOne == vertexOne)[0];
+  public getEdge(vertexOne: IVertex, vertexTwo: IVertex): UndirectedEdge[] {
+    return this.edges.filter(a => a.vertexTwo.equals(vertexTwo) && a.vertexOne.equals(vertexOne));
   }
 
   public buildSCC(): IGraph<IVertex, IEdge>[] {
