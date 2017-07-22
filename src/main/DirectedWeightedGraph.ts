@@ -5,7 +5,7 @@ import {IWeightedEdge} from "../types/IWeightedEdge";
 import {Graph} from "./Graph";
 
 
-export class DirectedWeightedGraph extends Graph<IVertex, IWeightedEdge> {
+export class DirectedWeightedGraph extends Graph<IVertex, DirectedWeightedEdge> {
 
   /**
    * @static
@@ -56,7 +56,8 @@ export class DirectedWeightedGraph extends Graph<IVertex, IWeightedEdge> {
    * @param vertexTwo
    */
   public getEdge(vertexOne: IVertex, vertexTwo: IVertex): DirectedWeightedEdge[] {
-    return this.edges.filter(a => a.vertexTwo.equals(vertexTwo) && a.vertexOne.equals(vertexOne)); //TODO: why is it so?
+    return this.edges.filter(a => a.vertexTwo.equals(vertexTwo) && a.vertexOne.equals(vertexOne));
+    //TODO: why IWeightedEdge is not compatible to DirectedWeightedEdge?
   }
 
   /**

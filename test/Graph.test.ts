@@ -3,6 +3,9 @@ import {Edge} from "../src/main/Edge";
 import {Vertex} from "../src/main/Vertex";
 import {Graph} from "../src/main/Graph";
 import {IVertex} from "../src/types/IVertex";
+import {UndirectedGraph} from "../src/main/UndirectedGraph";
+import {DirectedWeightedEdge} from "../src/main/DirectedWeightedEdge";
+import {DirectedWeightedGraph} from "../src/main/DirectedWeightedGraph";
 
 describe("Graph", () => {
     const graph = new Graph<Vertex, Edge>();
@@ -74,4 +77,14 @@ describe("Graph", () => {
           chai.assert(edgeGot[0].vertexOne.equals(vertexOne) && edgeGot[0].vertexTwo.equals(vertexTwo));
       });
    });
+
+   describe("#union();", () => {
+       it("Empty graph and graph with one vertex returns graph with one vertex", () => {
+          const graphToBeUnion = new UndirectedGraph();
+          graphToBeUnion.addVertex(vertex);
+          const result = graphToBeUnion.union(graph);
+          chai.assert(result.edges.length == 0);
+          chai.assert(result.vertices.length == 1);
+       });
+   })
 });
