@@ -30,6 +30,6 @@
     "ts-node": "^3.2.0"
   },
   "scripts": {
-    "test": "mocha test/*.test.ts --require ts-node/require"
+    "test": "mocha -r ts-node/register test/**/*.test.ts"
   }
 }
