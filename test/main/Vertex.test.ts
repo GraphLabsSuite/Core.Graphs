@@ -1,10 +1,10 @@
 import * as chai from "chai";
-import {Vertex} from "../src/main/Vertex";
-import {Edge} from "../src/main/Edge";
-import {IGraph} from "../src/types/IGraph";
-import {IVertex} from "../src/types/IVertex";
-import {IEdge} from "../src/types/IEdge";
-import {Graph} from "../src/main/Graph";
+import {Vertex} from "../../src/main/Vertex";
+import {Edge} from "../../src/main/Edge";
+import {IGraph} from "../../src/types/IGraph";
+import {IVertex} from "../../src/types/IVertex";
+import {IEdge} from "../../src/types/IEdge";
+import {Graph} from "../../src/main/Graph";
 
 describe('Vertex', () => {
 

@@ -1,11 +1,11 @@
 import * as chai from "chai";
-import {Edge} from "../src/main/Edge";
-import {Vertex} from "../src/main/Vertex";
-import {Graph} from "../src/main/Graph";
-import {IVertex} from "../src/types/IVertex";
-import {UndirectedGraph} from "../src/main/UndirectedGraph";
-import {DirectedWeightedEdge} from "../src/main/DirectedWeightedEdge";
-import {DirectedWeightedGraph} from "../src/main/DirectedWeightedGraph";
+import {Edge} from "../../src/main/Edge";
+import {Vertex} from "../../src/main/Vertex";
+import {Graph} from "../../src/main/Graph";
+import {IVertex} from "../../src/types/IVertex";
+import {UndirectedGraph} from "../../src/main/UndirectedGraph";
+import {DirectedWeightedEdge} from "../../src/main/DirectedWeightedEdge";
+import {DirectedWeightedGraph} from "../../src/main/DirectedWeightedGraph";
 
 describe("Graph", () => {
     const graph = new Graph<Vertex, Edge>();

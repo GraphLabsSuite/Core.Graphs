@@ -1,8 +1,8 @@
 import * as chai from "chai";
-import {SccBuilder} from "../src/algorithms/SccBuilder";
-import {UndirectedGraph} from "../src/main/UndirectedGraph";
-import {Vertex} from "../src/main/Vertex";
-import {Edge} from "../src/main/Edge";
+import {SccBuilder} from "../../src/algorithms/SccBuilder";
+import {UndirectedGraph} from "../../src/main/UndirectedGraph";
+import {Vertex} from "../../src/main/Vertex";
+import {Edge} from "../../src/main/Edge";
 describe("SccBuilder", () => {
    describe("#findComponents();", () => {
        const graph: UndirectedGraph = new UndirectedGraph();
