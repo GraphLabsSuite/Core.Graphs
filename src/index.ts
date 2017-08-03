@@ -12,3 +12,7 @@ export * from './main/DirectedWeightedGraph';
 
 export * from './types/IVertex';
 export * from './main/Vertex';
+
+export * from './geometrics/GeometricEdge';
+export * from './geometrics/GeometricVertex';
+export * from './geometrics/GeometricGraph';
