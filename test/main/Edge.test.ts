@@ -1,6 +1,6 @@
 import * as chai from "chai";
-import {Vertex} from "../src/main/Vertex";
-import {Edge} from "../src/main/Edge";
+import {Vertex} from "../../src/main/Vertex";
+import {Edge} from "../../src/main/Edge";
 describe('Edge', () => {
     const vertex = new Vertex("my_name");
     const vertexOne = new Vertex("first");

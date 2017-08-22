@@ -15,6 +15,10 @@ export * from './main/DirectedWeightedGraph';
 export * from './types/IVertex';
 export * from './main/Vertex';
 
+export * from './geometrics/GeometricEdge';
+export * from './geometrics/GeometricVertex';
+export * from './geometrics/GeometricGraph';
+
 export * from './types/EdgeJSON';
 export * from './types/GraphJSON';
 export * from './types/VertexJSON';

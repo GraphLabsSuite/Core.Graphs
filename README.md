@@ -1,6 +1,10 @@
 # GraphLabsSuite.Core.Graphs
 The graph library of the GraphLabs project
 
+## [![Build Status](https://travis-ci.org/eakarpov/GraphLabsSuite.Core.Graphs.svg?branch=master)](https://travis-ci.org/eakarpov/GraphLabsSuite.Core.Graphs)
+## [![bitHound Overall Score](https://www.bithound.io/github/eakarpov/GraphLabsSuite.Core.Graphs/badges/score.svg)](https://www.bithound.io/github/eakarpov/GraphLabsSuite.Core.Graphs)
+## [![bitHound Dependencies](https://www.bithound.io/github/eakarpov/GraphLabsSuite.Core.Graphs/badges/dependencies.svg)](https://www.bithound.io/github/eakarpov/GraphLabsSuite.Core.Graphs/npm)
+
 ### Installation
 * npm install graphlabs.core.graphs
 
