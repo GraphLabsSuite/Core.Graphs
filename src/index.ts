@@ -32,3 +32,4 @@ export * from './helpers/GraphGenerator';
 
 export * from './enums/StateColor';
 export * from './util/GraphID';
+export * from './types/Point';
