@@ -82,7 +82,7 @@ export interface IGraph<T extends IVertex, K extends IEdge> extends IGraphStatic
    * @param graph
    * @returns {IGraph}
    */
-  union: (graph: IGraph)=> IGraph;
+  union: (graph: IGraph<IVertex, IEdge>)=> IGraph<IVertex, IEdge>;
 
   /**
    * @public
@@ -90,13 +90,13 @@ export interface IGraph<T extends IVertex, K extends IEdge> extends IGraphStatic
    * @param graph
    * @returns {IGraph}
    */
-  intersect: (graph: IGraph)=> IGraph;
+  intersect: (graph: IGraph<IVertex, IEdge>)=> IGraph<IVertex, IEdge>;
 
   /**
    * Returns the complement graph to this one
    * @returns {IGraph}
    */
-  complement: ()=> IGraph;
+  complement: ()=> IGraph<IVertex, IEdge>;
 
   /**
    * @public
@@ -104,14 +104,14 @@ export interface IGraph<T extends IVertex, K extends IEdge> extends IGraphStatic
    * @param graph
    * @returns {boolean}
    */
-  checkIsomorphism: (graph: IGraph)=> boolean;
+  checkIsomorphism: (graph: IGraph<IVertex, IEdge>)=> boolean;
 
   /**
    * @public
    * Returns strong connected components of the graph
    * @returns {IGraph[]}
    */
-  buildSCC: ()=> IGraph[];
+  buildSCC: ()=> IGraph<IVertex, IEdge>[];
 
   /**
    * Printing graph to the screen
@@ -127,5 +127,5 @@ export interface IGraph<T extends IVertex, K extends IEdge> extends IGraphStatic
    * Deep graph-cloning
    * @returns {IGraph}
    */
-  clone: ()=> IGraph;
+  clone: ()=> IGraph<IVertex, IEdge>;
 }

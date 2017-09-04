@@ -1,5 +1,7 @@
 import {IVertex} from "../types/IVertex";
 import {Vertex} from "../main/Vertex";
+import {VertexJSON} from "../types/VertexJSON";
+
 export class VertexToJSONConverter {
     public static convert(vertex: IVertex): VertexJSON {
         return {

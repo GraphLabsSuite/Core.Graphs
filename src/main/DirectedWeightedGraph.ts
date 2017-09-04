@@ -5,7 +5,7 @@ import {IWeightedEdge} from "../types/IWeightedEdge";
 import {Graph} from "./Graph";
 
 
-export class DirectedWeightedGraph extends Graph<IVertex, DirectedWeightedEdge> {
+export class DirectedWeightedGraph extends Graph<Vertex, DirectedWeightedEdge> {
 
   /**
    * @static
@@ -67,8 +67,8 @@ export class DirectedWeightedGraph extends Graph<IVertex, DirectedWeightedEdge> 
    */
   public clone(): DirectedWeightedGraph {
     let clone = new DirectedWeightedGraph();
-    super.vertices.forEach(v => clone.addVertex(new Vertex(v.name)));
-    super.edges.forEach(e => {
+    this.vertices.forEach(v => clone.addVertex(new Vertex(v.name)));
+    this.edges.forEach(e => {
       const dwe = <DirectedWeightedEdge> e;
       const v1 = clone.vertices.filter(v => v.equals(e.vertexOne))[0];//Single
       const v2 = clone.vertices.filter(v => v.equals(e.vertexTwo))[0];//First
