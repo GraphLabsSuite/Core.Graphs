@@ -13,6 +13,6 @@ export * from './main/DirectedWeightedGraph';
 export * from './types/IVertex';
 export * from './main/Vertex';
 
-export * from './geometrics/GeometricEdge';
-export * from './geometrics/GeometricVertex';
-export * from './geometrics/GeometricGraph';
+export * from '../../GraphLabsSuite.Core.GraphVisualizer/src/geometrics/GeometricEdge';
+export * from '../../GraphLabsSuite.Core.GraphVisualizer/src/geometrics/GeometricVertex';
+export * from '../../GraphLabsSuite.Core.GraphVisualizer/src/geometrics/GeometricGraph';

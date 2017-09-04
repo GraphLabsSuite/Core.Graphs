@@ -12,6 +12,14 @@ The graph library of the GraphLabs project
     * npm install -g mocha
     * npm install -g ts-node
 
+### For contributors
+* install Node, npm/yarn, WebStorm/Intellij IDEA
+* look at package.json file to see how to run tests
+* do not forget to update version before publishing
+* while contributing, write maximum comments
+* add specification tags of JSDoc to every function and class you have created
+* seek to write tests over every functionality you adds to the module
+
 ### Content
 * JSON types
     * GraphJSON - representation of the whole graph in JSON format
