@@ -15,6 +15,7 @@
     "url": "https://github.com/eakarpov/GraphLabsSuite.Core.Graphs.git"
   },
   "dependencies": {
+    "@types/lodash": "^4.14.64",
     "immutable": "^3.8.1",
     "lodash": "^4.13.1",
     "ts-md5": "^1.2.0",
@@ -22,7 +23,6 @@
   },
   "devDependencies": {
     "@types/chai": "^4.0.1",
-    "@types/lodash": "^4.14.64",
     "@types/mocha": "^2.2.41",
     "chai": "^4.1.0",
     "mocha": "^3.4.2",
