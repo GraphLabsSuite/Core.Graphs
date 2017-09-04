@@ -1,4 +1,4 @@
-import {StateColor} from "../../../GraphLabsSuite.Core.GraphVisualizer/src/enums/StateColor";
+import {StateColor} from "../enums/StateColor";
 import {IVertex} from "../types/IVertex";
 import {UndirectedGraph} from "../main/UndirectedGraph";
 
