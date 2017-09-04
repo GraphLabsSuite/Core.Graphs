@@ -2,7 +2,7 @@ import {IVertex} from "../types/IVertex";
 import {UndirectedGraph} from "../main/UndirectedGraph";
 import {State} from "../util/State";
 import {CheckSet} from "../util/CheckSet";
-import {StateColor} from "../enums/StateColor";
+import {StateColor} from "../../../GraphLabsSuite.Core.GraphVisualizer/src/enums/StateColor";
 /**
  * @classdesc
  * Minimal dominating sets evaluator
