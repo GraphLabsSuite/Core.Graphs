@@ -13,7 +13,7 @@ import {Graph} from "../main/Graph";
  */
 export class GraphGenerator {
 
-    public static generateVerticeNumber(max: number): number {
+    public static generateVertexNumber(max: number): number {
       return Math.floor(Math.random() * max) + 1;
     }
 
@@ -28,38 +28,38 @@ export class GraphGenerator {
      */
     public static generate(verticeNumber?: number): IGraph<IVertex, IEdge> {
         if (verticeNumber == null) {
-            const verticeNumberGen: number = GraphGenerator.generateVerticeNumber(10);
+            const verticeNumberGen: number = GraphGenerator.generateVertexNumber(10);
             return GraphGenerator.generate(verticeNumberGen);
         }
         const graph: IGraph<IVertex, IEdge> = new Graph<Vertex, Edge>();
         for(let i: number = 0; i < verticeNumber; i++) {
             graph.addVertex(new Vertex(i.toString(), graph));
         }
-        const edgeNumber: number = GraphGenerator.generateVerticeNumber(graph.vertices.length);
+        const edgeNumber: number = GraphGenerator.generateVertexNumber(graph.vertices.length);
         for(let i: number = 0; i < edgeNumber; i++) {
-            let verticeOne: IVertex = undefined;
-            let verticeTwo: IVertex = undefined;
+            let vertexOne: IVertex = undefined;
+            let vertexTwo: IVertex = undefined;
             let flag1;
             let flag2;
             let flag3;
             let flag4;
             let flag5;
             do {
-                const verticeOneNumber: number = GraphGenerator.generateVerticeNumber(graph.vertices.length - 1);
-                const verticeTwoNumber: number = GraphGenerator.generateVerticeNumber(graph.vertices.length - 1);
-                verticeOne = graph.getVertex(verticeOneNumber.toString())[0];
-                verticeTwo = graph.getVertex(verticeTwoNumber.toString())[0];
-                flag1 = verticeOne === undefined;
-                flag2 = verticeTwo === undefined;
-                flag3 = verticeOne == verticeTwo;
-                flag4 = graph.getEdge(verticeOne, verticeTwo).length != 0;
-                flag5 = graph.getEdge(verticeTwo, verticeOne).length != 0;
+                const vertexOneNumber: number = GraphGenerator.generateVertexNumber(graph.vertices.length - 1);
+                const vertexTwoNumber: number = GraphGenerator.generateVertexNumber(graph.vertices.length - 1);
+                vertexOne = graph.getVertex(vertexOneNumber.toString())[0];
+                vertexTwo = graph.getVertex(vertexTwoNumber.toString())[0];
+                flag1 = vertexOne === undefined;
+                flag2 = vertexTwo === undefined;
+                flag3 = vertexOne == vertexTwo;
+                flag4 = graph.getEdge(vertexOne, vertexTwo).length != 0;
+                flag5 = graph.getEdge(vertexTwo, vertexOne).length != 0;
             } while(flag1 || flag2
                  || flag3
                  || flag4
                  || flag5
                 );
-            graph.addEdge(new Edge(verticeOne, verticeTwo));
+            graph.addEdge(new Edge(vertexOne, vertexTwo));
         }
         return graph;
     }
