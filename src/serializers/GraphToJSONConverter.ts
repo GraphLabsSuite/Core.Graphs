@@ -8,6 +8,8 @@ import {IVertex} from "../types/IVertex";
 import {Vertex} from "../main/Vertex";
 import {Edge} from "../main/Edge";
 import {DirectedWeightedGraph} from "../main/DirectedWeightedGraph";
+import {DirectedGraph} from "../main/DirectedGraph";
+import {UndirectedGraph} from "../main/UndirectedGraph";
 
 export class GraphToJSONConverter {
     public static convert(graph: IGraph<IVertex, IEdge>): GraphJSON {
@@ -20,7 +22,18 @@ export class GraphToJSONConverter {
     }
 
     public static convertBack(graph: GraphJSON): IGraph<IVertex, IEdge> {
-        return new Graph<Vertex, Edge>();
-        //Filling graph
+        let result: IGraph<IVertex, IEdge>;
+        if (graph.isDirected) {
+            if (graph.weighted) {
+                result = new DirectedWeightedGraph();
+            } else {
+                result = new DirectedGraph();
+            }
+        } else {
+            result = new UndirectedGraph();
+        }
+        graph.vertices.forEach(v => result.addVertex(VertexToJSONConverter.convertBack(v, result)));
+        graph.edges.forEach(e => result.addEdge(EdgeToJSONConverter.convertBack(e, result)));
+        return result;
     }
 }
