@@ -6,6 +6,7 @@ import {IVertex} from "../../src/types/IVertex";
 import {UndirectedGraph} from "../../src/main/UndirectedGraph";
 import {DirectedWeightedEdge} from "../../src/main/DirectedWeightedEdge";
 import {DirectedWeightedGraph} from "../../src/main/DirectedWeightedGraph";
+import {DirectedEdge, DirectedGraph} from "../../src";
 
 describe("Graph", () => {
     const graph = new Graph<Vertex, Edge>();
@@ -97,6 +98,21 @@ describe("Graph", () => {
        //     chai.assert(result.edges.length == 1);
        //     chai.assert(result.vertices.length == 3);
        // });
+   });
+
+   describe('DirectedGraph', () => {
+     it('Directed Graph is created', () => {
+       const v1 = new Vertex('1');
+       const v2 = new Vertex('2');
+       const edge = new DirectedEdge(v1, v2);
+
+       const graph = new DirectedGraph();
+       graph.addVertex(v1);
+       graph.addVertex(v2);
+       graph.addEdge(edge);
+       chai.assert(graph.edges.length === 1);
+       chai.assert(graph.vertices.length === 2);
+     });
    });
 
    // describe("#intersect();", () => {
