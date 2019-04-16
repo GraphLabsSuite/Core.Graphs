@@ -1,4 +1,3 @@
-import * as _ from "lodash";
 import {IVertex} from "../types/IVertex";
 import {IEdge} from "../types/IEdge";
 import {IGraph} from "../types/IGraph";
