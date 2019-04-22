@@ -1,7 +1,9 @@
 import {IVertex} from "../types/IVertex";
 import {IGraph} from "../types/IGraph";
 import {IEdge} from "../types/IEdge";
-import {Edge, Graph, Vertex} from "..";
+import {Edge} from "../main/Edge";
+import {Vertex} from "../main/Vertex";
+import {Graph} from "../main/Graph";
 
 export class GraphCharacteristics {
     /**
