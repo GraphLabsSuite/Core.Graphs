@@ -78,7 +78,7 @@ export default class TreeNode {
     public deepNodeSearch(predicate: (node: TreeNode) => boolean): TreeNode | void {
         if (predicate(this)) { return this; }
         if (this.children.length > 0) {
-            return this.children.map((e: TreeNode) => e.deepNodeSearch(predicate)).find((e: TreeNode | void) => e !== void 0);
+            return this.children.map((e: TreeNode) => e.deepNodeSearch(predicate)).filter((e: TreeNode | void) => e !== void 0)[0];
         }
         return void 0;
     }
