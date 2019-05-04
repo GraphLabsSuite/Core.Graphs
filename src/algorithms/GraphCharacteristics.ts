@@ -4,6 +4,7 @@ import {IEdge} from "../types/IEdge";
 import {Edge} from "../main/Edge";
 import {Vertex} from "../main/Vertex";
 import {Graph} from "../main/Graph";
+import {GraphID} from "../util/GraphID";
 
 export class GraphCharacteristics {
     /**
@@ -48,4 +49,20 @@ export class GraphCharacteristics {
                 accum : accum.concat(next.name), []);
         return answer
     }
+
+    /**
+     * Get vertex's degree
+     */
+    public static getVertexDegree(vertex: IVertex, graph: IGraph<IVertex, IEdge>) {
+      return graph.edges.filter((e: IEdge) => (e.vertexOne === vertex) || (e.vertexTwo === vertex)).length;
+    }
+
+    /**
+     * Get vertex with minimum degree
+     */
+     public static getVertexWithMinDegree(graph: IGraph<IVertex, IEdge>) {
+       const verticesWithDegrees :  { [key: string]: number } = {};
+       graph.vertices.forEach((v: Vertex) => verticesWithDegrees[v.name] = GraphCharacteristics.getVertexDegree(v, graph));
+       Object.keys(verticesWithDegrees).filter(v => verticesWithDegrees[v] === (Math.min(...Object.keys(verticesWithDegrees).map(v => verticesWithDegrees[v]))))
+     }
 }
