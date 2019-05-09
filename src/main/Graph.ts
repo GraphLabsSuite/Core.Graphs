@@ -321,10 +321,10 @@ export class Graph<T extends Vertex, K extends Edge> implements IGraph<T,K> {
   /**
    * Get non-neighbourhood
    */
-  public getNonNeighbourhood(vertex: T): T[] {
+  public getNonNeighbourhood(vertex: Vertex): Vertex[] {
       const neighbours = this.getNeighbourhood(vertex);
       neighbours.push(vertex);
-      const answer = this.vertices.reduce((accum: T[], next: T) =>
+      const answer = this.vertices.reduce((accum: Vertex[], next: Vertex) =>
           (neighbours.indexOf(next) >= 0) ?
               accum : accum.concat(next), []);
       return answer

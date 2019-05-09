@@ -52,12 +52,11 @@ export class TreeNode<T> implements ITreeNode<T> {
   /**
    * @constructor
    */
-   private constructor(label: string, weight: T, position: {x: number; y: number}) {
+  constructor(label: string, weight: T) {
        this.id = TreeNode.lastId++;
        this.label = label;
        this.weight = weight;
        this.children = [];
-       this.position = position;
    }
   /**
    * @public
@@ -100,9 +99,9 @@ export class TreeNode<T> implements ITreeNode<T> {
    * @param weight
    * @param position
    */
-  public addChild(parentId: number, label: string, weight: T, position: {x: number; y: number}): void {
+  public addChild(parentId: number, label: string, weight: T): void {
     const node = this.getNodeById(parentId);
-    node.children.push(new TreeNode<T>(label, weight, position));
+    node.children.push(new TreeNode<T>(label, weight));
   }
   /**
    * @public
