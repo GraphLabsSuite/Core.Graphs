@@ -18,7 +18,6 @@
   "types": "build/index.d.ts",
   "dependencies": {
     "@types/lodash": "^4.14.64",
-    "es5": "^1.0.0",
     "immutable": "^3.8.1",
     "lodash": "^4.13.1",
     "ts-md5": "^1.2.0",
