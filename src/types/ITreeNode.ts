@@ -2,7 +2,7 @@
  * @interface
  * Base tree node interface
  */
-export interface ITreeNode {
+export interface ITreeNode<T> {
 
   /**
    * @property
@@ -22,7 +22,7 @@ export interface ITreeNode {
    * Node's weight
 
    */
-  weight: number;
+  weight: T;
   /**
    * @property
    * @private
@@ -59,7 +59,7 @@ export interface ITreeNode {
    * @param label
    * @param weight
    */
-  addChild: (parentId: number, label: string, weight: number, position: {x: number; y: number}) => void;
+  addChild: (parentId: number, label: string, weight: T, position: {x: number; y: number}) => void;
   /**
    * @public
    * Removes node

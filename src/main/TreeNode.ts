@@ -2,9 +2,9 @@ import {ITreeNode} from "../types/ITreeNode";
 
 /**
  * @classdesc
- * TreeNode implementation of the ITreeNode interface
+ * TreeNode<T> implementation of the ITreeNode interface
  */
-export class TreeNode implements ITreeNode {
+export class TreeNode<T> implements ITreeNode<T> {
 
   /**
    * @property
@@ -21,8 +21,9 @@ export class TreeNode implements ITreeNode {
   /**
    * @property
    * @public
-   * Node's label
+   * Node's parent identifier
    */
+   public parentId: number;
   /**
    * @property
    * @public
@@ -34,7 +35,7 @@ export class TreeNode implements ITreeNode {
    * @public
    * Node's weight
    */
-  public weight: number;
+  public weight: T;
   /**
    * @property
    * @public
@@ -46,12 +47,12 @@ export class TreeNode implements ITreeNode {
    * @public
    * The list of node's children
    */
-  public children: TreeNode[] = [];
+  public children: TreeNode<T>[] = [];
 
   /**
    * @constructor
    */
-   private constructor(label: string, weight: number, position: {x: number; y: number}) {
+   private constructor(label: string, weight: T, position: {x: number; y: number}) {
        this.id = TreeNode.lastId++;
        this.label = label;
        this.weight = weight;
@@ -97,10 +98,11 @@ export class TreeNode implements ITreeNode {
    * @param parentId
    * @param label
    * @param weight
+   * @param position
    */
-  public addChild(parentId: number, label: string, weight: number, position: {x: number; y: number}): void {
+  public addChild(parentId: number, label: string, weight: T, position: {x: number; y: number}): void {
     const node = this.getNodeById(parentId);
-    node.children.push(new TreeNode(label, weight, position));
+    node.children.push(new TreeNode<T>(label, weight, position));
   }
   /**
    * @public
@@ -108,41 +110,41 @@ export class TreeNode implements ITreeNode {
    * @param nodeId
    */
    public removeNode(nodeId: number): void {
-     const parentNode = this.deepNodeSearch((n: TreeNode) => n.children.some((e: TreeNode) => e.id === nodeId));
+     const parentNode = this.deepNodeSearch((n: TreeNode<T>) => n.children.some((e: TreeNode<T>) => e.id === nodeId));
      if (parentNode === void 0) { throw Error("Root cannot be removed."); }
-     (<TreeNode>parentNode).children = (<TreeNode>parentNode).children.filter((e: TreeNode) => e.id !== nodeId);
+     (<TreeNode<T>>parentNode).children = (<TreeNode<T>>parentNode).children.filter((e: TreeNode<T>) => e.id !== nodeId);
    }
   /**
    * @public
    * Finds node by id
    * @param nodeId
-   * @returns {TreeNode}
+   * @returns {TreeNode<T>}
    */
-   public getNodeById(nodeId: number): TreeNode {
-     const node = this.deepNodeSearch((n: TreeNode) => n.id === nodeId);
+   public getNodeById(nodeId: number): TreeNode<T> {
+     const node = this.deepNodeSearch((n: TreeNode<T>) => n.id === nodeId);
      if (node === void 0) { throw Error("No node found by specified id."); }
-     return <TreeNode>node;
+     return <TreeNode<T>>node;
    }
    /**
     * @public
     * Gets all nodes
-    * @returns {TreeNode[]}
+    * @returns {TreeNode<T>[]}
     */
-   public getNodeList(): TreeNode[] {
-     const childrenNodeList:TreeNode[] = this.children.map((e: TreeNode) => e.getNodeList()).reduce((a,b) => a.concat(b), []);
-     const self: TreeNode = this;
+   public getNodeList(): TreeNode<T>[] {
+     const childrenNodeList:TreeNode<T>[] = this.children.map((e: TreeNode<T>) => e.getNodeList()).reduce((a,b) => a.concat(b), []);
+     const self: TreeNode<T> = this;
      return [self].concat(childrenNodeList).sort((a,b) => a.getId() - b.getId());
    }
    /**
     * @public
     * Finds node by condition
     * @param predicate
-    * @returns {TreeNode | void}
+    * @returns {TreeNode<T> | void}
     */
-   public deepNodeSearch(predicate: (node: TreeNode) => boolean): TreeNode | void {
+   public deepNodeSearch(predicate: (node: TreeNode<T>) => boolean): TreeNode<T> | void {
      if (predicate(this)) { return this; }
      if (this.children.length > 0) {
-         return this.children.map((e: TreeNode) => e.deepNodeSearch(predicate)).filter((e: TreeNode | void) => e !== void 0)[0];
+         return this.children.map((e: TreeNode<T>) => e.deepNodeSearch(predicate)).filter((e: TreeNode<T> | void) => e !== void 0)[0];
      }
      return void 0;
    }
