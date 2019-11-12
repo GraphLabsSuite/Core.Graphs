@@ -17,14 +17,14 @@
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "dependencies": {
-    "@types/lodash": "^4.14.64",
+    "@types/lodash": "^4.14.146",
     "immutable": "^3.8.1",
-    "lodash": "^4.13.1",
-    "ts-md5": "^1.2.0",
-    "typescript": "^3.2.2"
+    "lodash": "^4.17.15",
+    "ts-md5": "^1.2.7",
+    "typescript": "^3.7.2"
   },
   "devDependencies": {
-    "@types/chai": "^4.0.1",
+    "@types/chai": "^4.2.4",
     "@types/mocha": "^2.2.41",
     "chai": "^4.1.0",
     "mocha": "^3.4.2",
