@@ -33,6 +33,15 @@ export class Graph<T extends Vertex, K extends Edge> implements IGraph<T,K> {
    *  Getter for _isDirected field
    *  @returns {boolean}
    *  */
+
+  private _counter: 'a';
+
+  /** @property
+   *  @public
+   *  Getter for _isDirected field
+   *  @returns {boolean}
+   *  */
+
   public get isDirected(): boolean {
     return this._isDirected;
   }
@@ -85,6 +94,8 @@ export class Graph<T extends Vertex, K extends Edge> implements IGraph<T,K> {
    * @param edge
    */
   public addEdge(edge: K): void {
+    edge.name = this._counter;
+    this._counter += 1;
     this.edges.push(edge);
   }
 
