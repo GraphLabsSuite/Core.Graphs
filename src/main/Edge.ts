@@ -31,6 +31,16 @@ export class Edge implements IEdge {
    * Getter for _vertexOne field
    * @return {IVertex}
    */
+
+  private _name: string;
+
+  /**
+   * @property
+   * @public
+   * Getter for _vertexOne field
+   * @return {IVertex}
+   */
+
   public get vertexOne(): IVertex {
     return this._vertexOne;
   }
@@ -51,7 +61,29 @@ export class Edge implements IEdge {
    * Getter for _isDirected field
    * @return {boolean}
    */
-  public get isDirected(): boolean|undefined {
+
+  public get name(): string {
+    return this._name;
+  }
+
+  /**
+   * @property
+   * @public
+   * Setter for _name field
+   */
+
+  public set name(value: string) {
+    this._name = value;
+  }
+
+  /**
+   * @property
+   * @public
+   * Getter for _isDirected field
+   * @return {boolean}
+   */
+
+  public get isDirected(): boolean {
     return this._isDirected;
   }
 
@@ -63,7 +95,7 @@ export class Edge implements IEdge {
   public constructor(vertexOne: IVertex, vertexTwo: IVertex) {
     this._vertexOne = vertexOne;
     this._vertexTwo = vertexTwo;
-    this._isDirected = undefined;
+    this._isDirected = false;
   }
 
   public isIncident(vertex: IVertex): boolean {
