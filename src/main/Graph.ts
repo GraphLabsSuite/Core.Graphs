@@ -33,15 +33,6 @@ export class Graph<T extends Vertex, K extends Edge> implements IGraph<T,K> {
    *  Getter for _isDirected field
    *  @returns {boolean}
    *  */
-
-  private _counter: 'a';
-
-  /** @property
-   *  @public
-   *  Getter for _isDirected field
-   *  @returns {boolean}
-   *  */
-
   public get isDirected(): boolean {
     return this._isDirected;
   }
@@ -94,8 +85,6 @@ export class Graph<T extends Vertex, K extends Edge> implements IGraph<T,K> {
    * @param edge
    */
   public addEdge(edge: K): void {
-    edge.name = this._counter;
-    this._counter += 1;
     this.edges.push(edge);
   }
 
@@ -298,4 +287,63 @@ export class Graph<T extends Vertex, K extends Edge> implements IGraph<T,K> {
 
     return clone;
   }
+
+  /**
+   * Get subgraph of graph
+   * input: vertives
+   */
+   public getSubgraph(subVertices: T[]): IGraph<IVertex, IEdge>{
+      const subGraph = new Graph<Vertex, Edge>();
+      subVertices.forEach(v => {
+          subGraph.addVertex(v.clone());
+      });
+      this.edges.filter(e =>
+          (subVertices.indexOf(<T>e.vertexOne) >= 0)
+          &&  (subVertices.indexOf(<T>e.vertexTwo) >= 0)).forEach((e: K) => subGraph.addEdge(new Edge(e.vertexOne, e.vertexTwo)));
+      return subGraph;
+  }
+
+  /**
+   * Get neighbourhood
+   */
+  public getNeighbourhood(vertex: Vertex): Vertex[] {
+      const neighbourhood: Vertex[] = [];
+      this.vertices.forEach((v: Vertex) => neighbourhood.push(v.clone()));
+      return neighbourhood.reduce((accum: Vertex[], next: Vertex) => {
+              this.edges.forEach(e => {
+                if (e.vertexOne === vertex) accum.push(e.vertexTwo as Vertex);
+                if (e.vertexTwo === vertex) accum.push(e.vertexOne as Vertex);
+              });
+              return accum;
+            }, []);
+  }
+
+  /**
+   * Get non-neighbourhood
+   */
+  public getNonNeighbourhood(vertex: Vertex): Vertex[] {
+      const neighbours = this.getNeighbourhood(vertex);
+      neighbours.push(vertex);
+      const answer = this.vertices.reduce((accum: Vertex[], next: Vertex) =>
+          (neighbours.indexOf(next) >= 0) ?
+              accum : accum.concat(next), []);
+      return answer
+  }
+
+  /**
+   * Get vertex's degree
+   */
+  public getVertexDegree(vertex: Vertex): number {
+    return this.edges.filter((e: Edge) => (e.vertexOne === vertex) || (e.vertexTwo === vertex)).length;
+  }
+
+  /**
+   * Get vertex with minimum degree
+   */
+   public getVertexWithMinDegree(): Vertex | null {
+     return this.vertices.reduce((min: Vertex | null, next: Vertex) => {
+       if (!min || this.getVertexDegree(next) < this.getVertexDegree(min)) return next;
+       return min;
+     }, null);
+   }
 }

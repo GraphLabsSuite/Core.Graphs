@@ -1,6 +1,6 @@
 {
   "name": "graphlabs.core.graphs",
-  "version": "0.0.33",
+  "version": "0.1.0",
   "author": "GraphLabs",
   "description": "The graph library for the GraphLabs web project",
   "keywords": [
@@ -31,7 +31,7 @@
     "ts-node": "^3.2.0"
   },
   "scripts": {
-    "compile": "tsc -p tsconfig.json",
+    "build": "tsc -p tsconfig.json",
     "test": "mocha -r ts-node/register test/**/*.test.ts"
   }
 }

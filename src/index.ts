@@ -33,4 +33,3 @@ export * from './enums/StateColor';
 export * from './algorithms/IsomorphismChecker';
 export * from './algorithms/MinDSEvaluator';
 export * from './algorithms/SccBuilder';
-export * from './algorithms/GraphCharacteristics';
