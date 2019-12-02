@@ -83,7 +83,7 @@ export class Edge implements IEdge {
    * @return {boolean}
    */
 
-  public get isDirected(): boolean|undefined {
+  public get isDirected(): boolean {
     return this._isDirected;
   }
 
@@ -95,7 +95,7 @@ export class Edge implements IEdge {
   public constructor(vertexOne: IVertex, vertexTwo: IVertex) {
     this._vertexOne = vertexOne;
     this._vertexTwo = vertexTwo;
-    this._isDirected = undefined;
+    this._isDirected = false;
   }
 
   public isIncident(vertex: IVertex): boolean {
