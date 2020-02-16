@@ -31,6 +31,13 @@ export interface IEdge {
   isIncident: (vertex: IVertex)=> boolean;
 
   /**
+   * @property
+   * @public
+   * The name of the edge(shown on the edge visually)
+   */
+  name: string;
+
+  /**
    * @public
    * Compares two edges
    * @param edge

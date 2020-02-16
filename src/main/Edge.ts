@@ -28,7 +28,7 @@ export class Edge implements IEdge {
   /**
    * @property
    * @public
-   * Getter for _vertexOne field
+   * The name of the edge
    * @return {IVertex}
    */
 
@@ -92,10 +92,11 @@ export class Edge implements IEdge {
    * @param vertexOne
    * @param vertexTwo
    */
-  public constructor(vertexOne: IVertex, vertexTwo: IVertex) {
+  public constructor(vertexOne: IVertex, vertexTwo: IVertex, name: string = undefined) {
     this._vertexOne = vertexOne;
     this._vertexTwo = vertexTwo;
     this._isDirected = false;
+    this._name = name;
   }
 
   public isIncident(vertex: IVertex): boolean {
