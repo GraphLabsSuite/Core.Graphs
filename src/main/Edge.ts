@@ -29,7 +29,6 @@ export class Edge implements IEdge {
    * @property
    * @public
    * The name of the edge
-   * @return {IVertex}
    */
 
   private _name: string;
