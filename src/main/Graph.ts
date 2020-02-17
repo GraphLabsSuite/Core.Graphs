@@ -258,6 +258,7 @@ export class Graph<T extends Vertex, K extends Edge> implements IGraph<T,K> {
   }
 
   public print(): void {
+    // @ts-ignore
     console.log(this.toString());
   }
 
