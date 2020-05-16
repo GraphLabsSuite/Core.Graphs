@@ -107,10 +107,20 @@ export class Vertex implements IVertex {
     this.setName(newName);
   }
 
+  /**
+   * @public
+   * Checks whether the edge is incident to the vertex
+   * @param edge
+   */
   public isIncident(edge: IEdge): boolean {
-    return edge.isIncident(this);
+    return edge.vertexOne.name === this.name || edge.vertexTwo.name === this.name;
   }
 
+  /**
+   * @public
+   * Checks whether the vertex is adjacent to the given one
+   * @param vertex
+   */
   public isAdjacent(vertex: IVertex): boolean {
     if (this._graphReference == null) return false;
     let result = false;
@@ -121,6 +131,21 @@ export class Vertex implements IVertex {
       }
     });
     return result;
+  }
+
+  /**
+   * @public
+   * Return the array of incident edges for the vertex
+   * @param graph
+   */
+  public arrOfIncidentEdges(graph: IGraph<IVertex, IEdge>): IEdge[] {
+    let res: IEdge[] = [];
+    for (let i = 0; i < graph.edges.length; i++) {
+      if (this.isIncident(graph.edges[i])) {
+        res.push(graph.edges[i]);
+      }
+    }
+    return res;
   }
 
   /**
