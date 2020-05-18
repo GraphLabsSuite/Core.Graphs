@@ -45,6 +45,12 @@ export interface IVertex {
   isAdjacent: (vertex: IVertex)=> boolean;
 
   /**
+   * Return the array of incident edges for the vertex
+   * @param graph
+   */
+  arrOfIncidentEdges: (graph: IGraph<IVertex, IEdge>) => IEdge[];
+
+  /**
    * Check whether two graphs are equal
    * @param vertex
    * @returns {boolean}
