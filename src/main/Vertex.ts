@@ -147,6 +147,22 @@ export class Vertex implements IVertex {
     }
     return res;
   }
+  
+  /**
+   * @public
+   * Return the array of adjacent vertices for the vertex
+   * @param graph
+   */
+  
+    public arrOfAdjacentVertices(graph: IGraph<IVertex, IEdge>): IVertex[] {
+    let res: IVertex[] = [];
+    for (let i = 0; i < graph.vertices.length; i++) {
+      if (this.isAdjacent(graph.vertices[i])) {
+        res.push(graph.vertices[i]);
+      }
+    }
+    return res;
+  }
 
   /**
    * @public
