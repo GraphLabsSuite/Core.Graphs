@@ -156,7 +156,7 @@ export class Vertex implements IVertex {
     public arrOfAdjacentVertices(graph: IGraph<IVertex, IEdge>): IVertex[] {
     let res: IVertex[] = [];
     for (let i = 0; i < graph.vertices.length; i++) {
-      if (this.isAdjacent(graph.vertices[i])) {
+      if (this.isAdjacent(graph, graph.vertices[i])) {
         res.push(graph.vertices[i]);
       }
     }
