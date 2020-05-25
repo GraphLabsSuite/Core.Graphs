@@ -121,16 +121,15 @@ export class Vertex implements IVertex {
    * Checks whether the vertex is adjacent to the given one
    * @param vertex
    */
-  public isAdjacent(vertex: IVertex): boolean {
-    if (this._graphReference == null) return false;
-    let result = false;
-    this._graphReference.edges.forEach(e => {
-      if (e.vertexOne.equals(this) && e.vertexTwo.equals(vertex)||
-      e.vertexTwo.equals(this) && e.vertexOne.equals(vertex)) {
-        result = true;
-      }
-    });
-    return result;
+  public isAdjacent(graph: IGraph<IVertex, IEdge>, vertex: IVertex): boolean {
+    if (graph.edges.some((e: IEdge) =>
+        (vertex && this && ((e.vertexOne.name === this.name
+            && e.vertexTwo.name === vertex.name)
+            || (e.vertexOne.name === vertex.name
+                && e.vertexTwo.name === this.name)))))
+      return true;
+    else
+      return false;
   }
 
   /**
