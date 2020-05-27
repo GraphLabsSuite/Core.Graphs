@@ -369,6 +369,6 @@ export class Graph<T extends Vertex, K extends Edge> implements IGraph<T,K> {
       }
       dfs(this.vertices[0]);
       return (visited.length == this.vertices.length);
-      }
+    }
 
 }
