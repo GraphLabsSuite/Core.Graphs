@@ -49,6 +49,12 @@ export interface IVertex {
    * @param graph
    */
   arrOfIncidentEdges: (graph: IGraph<IVertex, IEdge>) => IEdge[];
+  
+    /**
+   * Return the array of adjacent vertices for the vertex
+   * @param graph
+   */
+  arrOfAdjacentVertices: (graph: IGraph<IVertex, IEdge>) => IVertex[];
 
   /**
    * Check whether two graphs are equal
