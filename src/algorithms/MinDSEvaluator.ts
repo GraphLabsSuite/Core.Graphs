@@ -37,7 +37,7 @@ export class MinDSEvaluator {
             tempDs.push(graph.vertices[i]);
             let tempDelta: number = 0;
             for (let j: number = 0; j < this._n; j++) {
-                if (graph.vertices[i].isAdjacent(graph.vertices[j])) tempDelta++;
+                if (graph.vertices[i].isAdjacent(graph, graph.vertices[j])) tempDelta++;
             }
             if (tempDelta > this._delta) this._delta = tempDelta;
         }
