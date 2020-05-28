@@ -35,6 +35,14 @@ export class Vertex implements IVertex {
    * The additional label for extra information (i.e. weight)
    */
   private _label: string;
+  
+    /**
+   * @property
+   * @private
+   * The additional attribute for information of the vertex wave position
+   */
+  private _wave: string;
+
 
   /**
    * @property
@@ -75,6 +83,17 @@ export class Vertex implements IVertex {
   public get label(): string {
     return this._label;
   }
+  
+  
+  /**
+   * @property
+   * @public
+   * Getter for _wave field
+   * @returns {string}
+   */
+  public get wave(): string {
+    return this._wave;
+  }
 
   /**
    * @property
@@ -84,6 +103,16 @@ export class Vertex implements IVertex {
    */
   public set label(theLabel: string) {
     this._label = theLabel;
+  }
+  
+   /**
+   * @property
+   * @public
+   * Setter for _label field
+   * @param theLabel
+   */
+  public set wave(theWave: string) {
+    this._wave = theWave;
   }
 
   /**
@@ -95,6 +124,7 @@ export class Vertex implements IVertex {
     this._name = name;
     this._id = GraphID.generate();
     this._label = "";
+    this._wave = "";
     this._graphReference = graph
   }
 
