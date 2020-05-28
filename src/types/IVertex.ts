@@ -26,6 +26,12 @@ export interface IVertex {
    */
   label?: string;
   /**
+   * @property
+   * @public
+   * The additional attribute for information of the vertex wave position
+   */
+  wave?: string;
+  /**
    * Allows to change the name property of the vertex
    * @param newName
    * @returns {IVertex}
