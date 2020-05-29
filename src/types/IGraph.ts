@@ -128,4 +128,12 @@ export interface IGraph<T extends IVertex, K extends IEdge> extends IGraphStatic
    * @returns {IGraph}
    */
   clone: ()=> IGraph<IVertex, IEdge>;
+  
+  /**
+   * @public
+   * Checks if the graph is connected
+   * @param graph
+   * @returns {boolean}
+   */
+  isConnected: (graph: IGraph<IVertex, IEdge>)=> boolean;
 }

@@ -48,7 +48,7 @@ export interface IVertex {
    * Checks whether the vertex is adjacent to the given one
    * @param vertex
    */
-  isAdjacent: (graph: IGraph, vertex: IVertex)=> boolean;
+  isAdjacent: (graph: IGraph<IVertex, IEdge>, vertex: IVertex)=> boolean;
 
   /**
    * Return the array of incident edges for the vertex
