@@ -26,6 +26,12 @@ export interface IVertex {
    */
   label?: string;
   /**
+   * @property
+   * @public
+   * The additional attribute for information of the vertex wave position
+   */
+  wave?: string;
+  /**
    * Allows to change the name property of the vertex
    * @param newName
    * @returns {IVertex}
@@ -42,13 +48,19 @@ export interface IVertex {
    * Checks whether the vertex is adjacent to the given one
    * @param vertex
    */
-  isAdjacent: (vertex: IVertex)=> boolean;
+  isAdjacent: (graph: IGraph, vertex: IVertex)=> boolean;
 
   /**
    * Return the array of incident edges for the vertex
    * @param graph
    */
   arrOfIncidentEdges: (graph: IGraph<IVertex, IEdge>) => IEdge[];
+  
+    /**
+   * Return the array of adjacent vertices for the vertex
+   * @param graph
+   */
+  arrOfAdjacentVertices: (graph: IGraph<IVertex, IEdge>) => IVertex[];
 
   /**
    * Check whether two graphs are equal

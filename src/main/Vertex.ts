@@ -35,6 +35,14 @@ export class Vertex implements IVertex {
    * The additional label for extra information (i.e. weight)
    */
   private _label: string;
+  
+    /**
+   * @property
+   * @private
+   * The additional attribute for information of the vertex wave position
+   */
+  private _wave: string;
+
 
   /**
    * @property
@@ -75,6 +83,17 @@ export class Vertex implements IVertex {
   public get label(): string {
     return this._label;
   }
+  
+  
+  /**
+   * @property
+   * @public
+   * Getter for _wave field
+   * @returns {string}
+   */
+  public get wave(): string {
+    return this._wave;
+  }
 
   /**
    * @property
@@ -84,6 +103,16 @@ export class Vertex implements IVertex {
    */
   public set label(theLabel: string) {
     this._label = theLabel;
+  }
+  
+   /**
+   * @property
+   * @public
+   * Setter for _label field
+   * @param theLabel
+   */
+  public set wave(theWave: string) {
+    this._wave = theWave;
   }
 
   /**
@@ -95,6 +124,7 @@ export class Vertex implements IVertex {
     this._name = name;
     this._id = GraphID.generate();
     this._label = "";
+    this._wave = "";
     this._graphReference = graph
   }
 
@@ -121,16 +151,15 @@ export class Vertex implements IVertex {
    * Checks whether the vertex is adjacent to the given one
    * @param vertex
    */
-  public isAdjacent(vertex: IVertex): boolean {
-    if (this._graphReference == null) return false;
-    let result = false;
-    this._graphReference.edges.forEach(e => {
-      if (e.vertexOne.equals(this) && e.vertexTwo.equals(vertex)||
-      e.vertexTwo.equals(this) && e.vertexOne.equals(vertex)) {
-        result = true;
-      }
-    });
-    return result;
+  public isAdjacent(graph: IGraph<IVertex, IEdge>, vertex: IVertex): boolean {
+    if (graph.edges.some((e: IEdge) =>
+        (vertex && this && ((e.vertexOne.name === this.name
+            && e.vertexTwo.name === vertex.name)
+            || (e.vertexOne.name === vertex.name
+                && e.vertexTwo.name === this.name)))))
+      return true;
+    else
+      return false;
   }
 
   /**
@@ -143,6 +172,22 @@ export class Vertex implements IVertex {
     for (let i = 0; i < graph.edges.length; i++) {
       if (this.isIncident(graph.edges[i])) {
         res.push(graph.edges[i]);
+      }
+    }
+    return res;
+  }
+  
+  /**
+   * @public
+   * Return the array of adjacent vertices for the vertex
+   * @param graph
+   */
+  
+    public arrOfAdjacentVertices(graph: IGraph<IVertex, IEdge>): IVertex[] {
+    let res: IVertex[] = [];
+    for (let i = 0; i < graph.vertices.length; i++) {
+      if (this.isAdjacent(graph, graph.vertices[i])) {
+        res.push(graph.vertices[i]);
       }
     }
     return res;

@@ -37,7 +37,7 @@ export class SccBuilder {
                     result[i][j] = 1;
                     continue;
                 }
-                if (graph.vertices[j].isAdjacent(graph.vertices[i])) {
+                if (graph.vertices[j].isAdjacent(graph, graph.vertices[i])) {
                     result[i][j] = 1;
                     continue;
                 }

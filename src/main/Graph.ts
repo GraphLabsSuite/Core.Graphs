@@ -348,3 +348,27 @@ export class Graph<T extends Vertex, K extends Edge> implements IGraph<T,K> {
      }, null);
    }
 }
+
+  /**
+   * Checks if the graph is connected
+   */
+
+  public isConnected(this: IGraph<IVertex, IEdge> ): boolean {
+      let visited: string [] = [];
+      let arr: IVertex[] = [];
+      function dfs(d: IVertex){
+          visited.push(d.name);
+          arr = d.arrOfAdjacentVertices(this);
+         for (let k = 0; k < arr.length; k++) {
+           for (let i = 0; i < visited.length; i++){
+            if (arr[k].name !== visited[i]) {
+               dfs(arr[k]);
+            }
+          }
+         }
+      }
+      dfs(this.vertices[0]);
+      return (visited.length == this.vertices.length);
+    }
+
+}
