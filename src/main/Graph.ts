@@ -353,22 +353,35 @@ export class Graph<T extends Vertex, K extends Edge> implements IGraph<T,K> {
    * Checks if the graph is connected
    */
 
-  public isConnected(graph: IGraph<IVertex,IEdge>): boolean {
-      let visited: string [] = [];
-      let arr: IVertex[] = [];
-      function dfs(d: IVertex){
-        visited.push(d.name);
-          arr = d.arrOfAdjacentVertices(graph);
-         for (let k = 0; k < arr.length; k++) {
-           for (let i = 0; i < visited.length; i++){
-            if (arr[k].name !== visited[i]) {
-               dfs(arr[k]);
+public isConnected(graph: IGraph<IVertex, IEdge>): boolean{
+        let visited: boolean[] = [];
+        for(let p = 0; p < graph.vertices.length; p++){
+            visited.push(false)
+        }
+        let arr: IVertex[] = [];
+        let visitedVertices = 0;
+        function numOfVertex(graph: IGraph<IVertex, IEdge>, vertex: IVertex): number {
+            let num = 0;
+            for(let i = 0; i < graph.vertices.length; i++){
+                if(vertex.name === graph.vertices[i].name){
+                    num = i;
+                }
             }
-          }
-         }
-      }
-      dfs(this.vertices[0]);
-      return (visited.length == graph.vertices.length);
+            return num;
+        }
+        function dfs(d: IVertex): number {
+            visitedVertices = 1;
+            visited[numOfVertex(graph, d)] = true;
+            arr = d.arrOfAdjacentVertices(graph);
+                for (let k = 0; k < arr.length; k++) {
+                    if (!visited[numOfVertex(graph, arr[k])]) {
+                        visitedVertices = visitedVertices + dfs(arr[k]);
+                    }
+                }
+
+            return visitedVertices
+        }
+        return (dfs(graph.vertices[0]) === graph.vertices.length)
     }
 
 }
