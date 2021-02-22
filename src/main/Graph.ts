@@ -39,6 +39,15 @@ export class Graph<T extends Vertex, K extends Edge> implements IGraph<T,K> {
 
   /** @property
    *  @public
+   *  Setter for _isDirected field
+   *  @returns {boolean}
+   *  */
+  public set isDirected (value: boolean) {
+    this._isDirected = value;
+  }
+
+  /** @property
+   *  @public
    *  Getter for _allowMultipleEdges field
    *  @returns {boolean}
    */
@@ -69,10 +78,10 @@ export class Graph<T extends Vertex, K extends Edge> implements IGraph<T,K> {
   /**
    * @constructor
    */
-   public constructor(directed?: boolean) {
+   public constructor(directed: boolean = false) {
     this._vertices = [];
     this._edges = [];
-    this._isDirected = directed == null ? false : directed;
+    this._isDirected = directed;
   }
 
   public clear(): void {

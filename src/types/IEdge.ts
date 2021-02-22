@@ -38,6 +38,13 @@ export interface IEdge {
   name: string;
 
   /**
+   * @property
+   * @public
+   * The weight label for the edge(shown on the edge visually)
+   */
+  weightLabel: string;
+
+  /**
    * @public
    * Compares two edges
    * @param edge
