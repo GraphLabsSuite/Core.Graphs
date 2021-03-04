@@ -121,10 +121,10 @@ export class Edge implements IEdge {
    * @param vertexOne
    * @param vertexTwo
    */
-  public constructor(vertexOne: IVertex, vertexTwo: IVertex, name: string = undefined, weightLabel: string = undefined) {
+  public constructor(vertexOne: IVertex, vertexTwo: IVertex, name: string = undefined, weightLabel: string = undefined, isDirected: boolean=false) {
     this._vertexOne = vertexOne;
     this._vertexTwo = vertexTwo;
-    this._isDirected = false;
+    this._isDirected = isDirected;
     this._name = name;
     this._weightLabel = weightLabel;
   }
