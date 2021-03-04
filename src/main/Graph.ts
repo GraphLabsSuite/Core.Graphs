@@ -69,10 +69,10 @@ export class Graph<T extends Vertex, K extends Edge> implements IGraph<T,K> {
   /**
    * @constructor
    */
-   public constructor(directed?: boolean) {
+   public constructor(directed: boolean = false) {
     this._vertices = [];
     this._edges = [];
-    this._isDirected = directed == null ? false : directed;
+    this._isDirected = directed;
   }
 
   public clear(): void {
