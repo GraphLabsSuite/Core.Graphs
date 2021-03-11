@@ -32,6 +32,14 @@ export class Edge implements IEdge {
    */
 
   private _name: string;
+  
+    /**
+   * @property
+   * @public
+   * The additional weight label
+   */
+
+  private _weightLabel: string;
 
   /**
    * @property
@@ -64,6 +72,17 @@ export class Edge implements IEdge {
   public get name(): string {
     return this._name;
   }
+  
+    /**
+   * @property
+   * @public
+   * Getter for _weightLabel field
+   * @return {number}
+   */
+
+  public get weightLabel(): string {
+    return this._weightLabel;
+  }
 
   /**
    * @property
@@ -74,6 +93,17 @@ export class Edge implements IEdge {
   public set name(value: string) {
     this._name = value;
   }
+  
+    /**
+   * @property
+   * @public
+   * Setter for _weightLabel field
+   */
+
+  public set weightLabel(value: string) {
+    this._weightLabel = value;
+  }
+
 
   /**
    * @property
@@ -91,11 +121,12 @@ export class Edge implements IEdge {
    * @param vertexOne
    * @param vertexTwo
    */
-  public constructor(vertexOne: IVertex, vertexTwo: IVertex, name: string = undefined) {
+  public constructor(vertexOne: IVertex, vertexTwo: IVertex, name: string = undefined, weightLabel: string = undefined, isDirected: boolean=false) {
     this._vertexOne = vertexOne;
     this._vertexTwo = vertexTwo;
-    this._isDirected = false;
+    this._isDirected = isDirected;
     this._name = name;
+    this._weightLabel = weightLabel;
   }
 
   public isIncident(vertex: IVertex): boolean {

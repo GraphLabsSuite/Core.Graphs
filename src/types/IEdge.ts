@@ -36,6 +36,13 @@ export interface IEdge {
    * The name of the edge(shown on the edge visually)
    */
   name: string;
+  
+    /**
+   * @property
+   * @public
+   * The weight label for the edge(shown on the edge visually)
+   */
+  weightLabel: string;
 
   /**
    * @public
