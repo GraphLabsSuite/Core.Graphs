@@ -28,48 +28,31 @@ export class SccBuilder {
         this._vertices = this._graph.vertices;
         this._accessibilityMatrix = SccBuilder.buildAccessibilityMatrix(graph);
     }
-
-    public static buildAdjacencyMatrix(graph: IGraph<IVertex, IEdge>): number[][] {
-        const result: number[][] = [];
-        for (let i: number = 0; i < graph.vertices.length; i++) {
-            result[i] = [];
-            for (let j: number = 0; j < graph.vertices.length; j++) {
-                if (i == j) {
-                    result[i][j] = 1;
-                    continue;
-                }
-                if (graph.vertices[j].isAdjacent(graph, graph.vertices[i])) {
-                    result[i][j] = 1;
-                    continue;
-                }
-                result[i][j] = 0;
-            }
-        }
-        return result;
-    }
     
     public static buildAccessibilityMatrix(graph: IGraph<IVertex, IEdge>): number[][] {
         let result: number[][] = [];
-        const diagonal: number[][] = [];
+        let diagonal: number[][] = [];
         for (let i: number = 0; i < graph.vertices.length; i++) {
             result[i] = [];
             diagonal[i] = [];
             for (let j: number = 0; j < graph.vertices.length; j++) {
                 if (i == j) {
                     diagonal[i][j] = 1;
-                    continue;
+                } else {
+                    diagonal[i][j] = 0;
                 }
                 if (graph.vertices[j].isAdjacent(graph, graph.vertices[i])) {
                     result[i][j] = 1;
-                    continue;
+                } else {
+                    result[i][j] = 0;
                 }
-                result[i][j] = 0;
             }
         }
         for (let i: number = 0; i < graph.vertices.length; i++){
             result = MatrixOperations.Sum(result, MatrixOperations.Power(result, i))
         }
-        result = MatrixOperations.Sum(result, diagonal)
+        result = MatrixOperations.Sum(result, diagonal);
+        result = MatrixOperations.Binary(result);
         return result;
     }
 
