@@ -10,6 +10,8 @@ export class MatrixOperations {
                     matrix1[i][j] += matrix2[i][j]
                 }
             }
+        } else {
+            throw new Error('Incorrect matrix size');
         }
         return matrix1;
     }
@@ -26,14 +28,18 @@ export class MatrixOperations {
                     }
                 }
             }
+        } else {
+            throw new Error('Incorrect matrix size');
         }
         return result;
     }
 
     public static Power(matrix: number[][], power: number ): number[][] {
-        if (power > 0){
+        if (power >= 0){
             for (let k: number = 1; k < power; k++)
             matrix = MatrixOperations.Multiply(matrix, matrix);
+        } else {
+            throw new Error('Power must be >= 0');
         }
         return matrix;
     }
