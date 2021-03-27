@@ -65,6 +65,17 @@ export class Graph<T extends Vertex, K extends Edge> implements IGraph<T,K> {
   public get edges(): K[] {
     return this._edges;
   }
+  
+    /**
+     * @property
+     * @public
+     * Setter for _isDirected field
+     */
+
+    public set isDirected (value: boolean) {
+        this._isDirected = value;
+    }
+
 
   /**
    * @constructor
