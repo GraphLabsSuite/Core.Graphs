@@ -115,6 +115,17 @@ export class Edge implements IEdge {
   public get isDirected(): boolean {
     return this._isDirected;
   }
+  
+    /**
+     * @property
+     * @public
+     * Setter for _isDirected field
+     */
+
+    public set isDirected (value: boolean) {
+        this._isDirected = value;
+    }
+
 
   /**
    * @constructor
