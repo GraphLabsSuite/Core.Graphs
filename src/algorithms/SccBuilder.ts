@@ -15,21 +15,22 @@ export class SccBuilder {
      * @param graph
      * @returns {IGraph[]}
      */
-    public static findComponents(graph: IGraph<IVertex, IEdge>): IGraph<IVertex, IEdge>[] {
-        return (new SccBuilder(graph)).buildComponents();
+    public static findComponents(graph: IGraph<IVertex, IEdge>, storng: boolean = true): IGraph<IVertex, IEdge>[] {
+        return (new SccBuilder(graph, storng)).buildComponents();
     }
 
     private readonly _accessibilityMatrix: number[][];
     private readonly _graph: IGraph<IVertex, IEdge>;
     private readonly _vertices: IVertex[];
 
-    private constructor(graph: IGraph<IVertex, IEdge>) {
+    //параметр strong отвечает за то, нужнали у орграфа сильная (true) или слабая (false) связность
+    private constructor(graph: IGraph<IVertex, IEdge>, storng: boolean = true) {
         this._graph = graph;
         this._vertices = this._graph.vertices;
-        this._accessibilityMatrix = SccBuilder.buildAccessibilityMatrix(graph);
+        this._accessibilityMatrix = SccBuilder.buildAccessibilityMatrix(graph, storng);
     }
-    
-    public static buildAccessibilityMatrix(graph: IGraph<IVertex, IEdge>): number[][] {
+
+    public static buildAccessibilityMatrix(graph: IGraph<IVertex, IEdge>, strong: boolean = true): number[][] {
         let result: number[][] = [];
         let diagonal: number[][] = [];
         for (let i: number = 0; i < graph.vertices.length; i++) {
@@ -53,6 +54,8 @@ export class SccBuilder {
         }
         result = MatrixOperations.Sum(result, diagonal);
         result = MatrixOperations.Binary(result);
+        if (!strong)
+            result = MatrixOperations.DirectedAccessibility(result);
         return result;
     }
 
