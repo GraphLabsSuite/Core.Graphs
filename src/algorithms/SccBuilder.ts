@@ -33,24 +33,27 @@ export class SccBuilder {
     public static buildAccessibilityMatrix(graph: IGraph<IVertex, IEdge>, strong: boolean = true): number[][] {
         let result: number[][] = [];
         let diagonal: number[][] = [];
+        let adjacency: number[][] = [];
         for (let i: number = 0; i < graph.vertices.length; i++) {
             result[i] = [];
             diagonal[i] = [];
+            adjacency[i] = [];
             for (let j: number = 0; j < graph.vertices.length; j++) {
+                result[i][j] = 0;
                 if (i == j) {
                     diagonal[i][j] = 1;
                 } else {
                     diagonal[i][j] = 0;
                 }
                 if (graph.vertices[j].isAdjacent(graph, graph.vertices[i])) {
-                    result[i][j] = 1;
+                    adjacency[i][j] = 1;
                 } else {
-                    result[i][j] = 0;
+                    adjacency[i][j] = 0;
                 }
             }
         }
-        for (let i: number = 0; i < graph.vertices.length; i++){
-            result = MatrixOperations.Sum(result, MatrixOperations.Power(result, i))
+        for (let i: number = 1; i < graph.vertices.length; i++){
+            result = MatrixOperations.Sum(result, MatrixOperations.Power(adjacency, i))
         }
         result = MatrixOperations.Sum(result, diagonal);
         result = MatrixOperations.Binary(result);
