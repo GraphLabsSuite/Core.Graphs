@@ -54,4 +54,15 @@ export class MatrixOperations {
         }
         return matrix;
     }
+    
+    public static DirectedAccessibility(matrix: number[][]): number[][] {
+        for (let i:number = 0; i<matrix.length; i++) {
+            for (let j:number = 0; j<matrix.length; j++) {
+                if (matrix[i][j] == 0 && matrix[j][i] == 1){
+                    matrix[i][j] = 1;
+                }
+            }
+        }
+        return matrix;
+        }
 }

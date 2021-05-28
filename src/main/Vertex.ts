@@ -152,13 +152,18 @@ export class Vertex implements IVertex {
    * @param vertex
    */
   public isAdjacent(graph: IGraph<IVertex, IEdge>, vertex: IVertex): boolean {
-    if (graph.edges.some((e: IEdge) =>
+    if (graph.isDirected == true){
+      if (graph.edges.some((e: IEdge) =>
+          (vertex && this && ((e.vertexTwo.name === this.name
+              && e.vertexOne.name === vertex.name)))))
+      return true;
+    }else if (graph.edges.some((e: IEdge) =>
         (vertex && this && ((e.vertexOne.name === this.name
             && e.vertexTwo.name === vertex.name)
             || (e.vertexOne.name === vertex.name
-                && e.vertexTwo.name === this.name)))))
+                && e.vertexTwo.name === this.name))))){
       return true;
-    else
+    } else
       return false;
   }
 
