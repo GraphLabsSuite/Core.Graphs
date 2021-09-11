@@ -110,7 +110,54 @@ class SCCGenerator{
         this.edges = []
         this.verNumber = getRandomNumber(2, 4)
         this.generateVertexes()
-        this.generateEdges()
+        this.generateCycle()
+    }
+
+    generateCycle(){
+        let listVertex = []
+        for(let i: number = 0; i < this.verNumber; i++) listVertex.push(this.vertexes[i])
+
+        let source = listVertex.shift()
+        let first = source
+
+        while(listVertex.length > 0){
+            if (listVertex.length == 1) {
+                let edge = {"source": source, "target": listVertex[0], "isDirected": true}
+                this.edges.push(edge)
+                source = listVertex[0]
+                break
+            }
+            let destination = getRandomElementArray(listVertex)
+            // @ts-ignore
+            let destinationIndex = listVertex.findIndex(i => i == destination)
+
+            let edge = {"source": source, "target": destination, "isDirected": true}
+            this.edges.push(edge)
+
+            source = destination
+            listVertex.splice(destinationIndex,1)
+        }
+
+        let edge = {"source": source, "target": first, "isDirected": true}
+        this.edges.push(edge)
+
+        let extraEdgesNumber = getRandomNumber(0, this.vertexes.length - 2)
+        while (extraEdgesNumber > 0){
+            let source = getRandomElementArray(this.vertexes)
+            let destination = getRandomElementArray(this.vertexes)
+
+            if(source !== destination) {
+
+                let edge = {"source": source, "target": destination, "isDirected": true}
+                let parseEdge = JSON.stringify(edge)
+                let parseAllEdges = JSON.stringify(this.edges)
+
+                if (parseAllEdges.indexOf(parseEdge) === -1) {
+                    this.edges.push(edge)
+                    extraEdgesNumber--
+                }
+            }
+        }
     }
 
     generateVertexes(){
