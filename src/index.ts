@@ -23,6 +23,7 @@ export * from './serializers/GraphToJSONConverter';
 export * from './serializers/VertexToJSONConverter';
 
 export * from './helpers/GraphGenerator';
+export * from './helpers/SCCGraphGenerator';
 
 export * from './util/GraphID';
 export * from './util/CheckSet';
