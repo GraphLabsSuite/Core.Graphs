@@ -22,7 +22,7 @@ export class DirectedEdge extends Edge {
    * @param vertexOne
    * @param vertexTwo
    */
-  public constructor(vertexOne: IVertex, vertexTwo: IVertex) {
-    super(vertexOne, vertexTwo);
+  public constructor(vertexOne: IVertex, vertexTwo: IVertex, name: string = undefined, weightLabel: string = undefined, isDirected:boolean = true) {
+    super(vertexOne, vertexTwo, name, weightLabel, isDirected);
   }
 }
