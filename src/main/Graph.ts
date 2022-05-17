@@ -9,7 +9,7 @@ import {UndirectedGraph} from "./UndirectedGraph";
 
 /** @classdesc
  * Graph implementation of the IGraph interface */
-export class Graph<T extends Vertex, K extends Edge> implements IGraph<T,K> {
+export class Graph<T extends Vertex, K extends IEdge> implements IGraph<T,K> {
   /** @property
    *  @private
    * Mark shows whether graph edges are directed or not */
@@ -346,7 +346,7 @@ export class Graph<T extends Vertex, K extends Edge> implements IGraph<T,K> {
    * Get vertex's degree
    */
   public getVertexDegree(vertex: Vertex): number {
-    return this.edges.filter((e: Edge) => (e.vertexOne === vertex) || (e.vertexTwo === vertex)).length;
+    return this.edges.filter((e: IEdge) => (e.vertexOne === vertex) || (e.vertexTwo === vertex)).length;
   }
 
   /**
